@@ -32,7 +32,7 @@ jobs:
 
       - name: Clone repos and build Docker image.
         run: |
-          git clone "https://${{ secrets.ACCESS_TOKEN }}@github.com/Kerwood/linuxblog-posts.git" lb-posts
+          git clone "https://${{ secrets.ACCESS_TOKEN }}@github.com/Kerwood/linuxblog-xyz.git" lb-posts
           git clone "https://${{ secrets.ACCESS_TOKEN }}@github.com/Kerwood/linuxblog-core.git" lb-core
           cp -rn lb-core/* lb-posts/
           docker build -t ${{ env.IMAGE }} ./lb-posts
