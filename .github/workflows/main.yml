@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build and push
+
+# Controls when the action will run.
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  IMAGE: registry.digitalocean.com/kerwood/linuxblog-xyz
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub Environment Variables Action
+        uses: FranzDiebold/github-env-vars-action@v1.2.1
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+            token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+
+      - name: Login to Digital Ocean Registry
+        run: doctl registry login --access-token ${{ secrets.DIGITALOCEAN_TOKEN }} --expiry-seconds 300
+
+      - name: Clone repos and build Docker image.
+        run: |
+          git clone "https://${{ secrets.ACCESS_TOKEN }}@github.com/Kerwood/linuxblog-posts.git" lb-posts
+          git clone "https://${{ secrets.ACCESS_TOKEN }}@github.com/Kerwood/linuxblog-core.git" lb-core
+          cp -rn lb-core/* lb-posts/
+          docker build -t ${{ env.IMAGE }} ./lb-posts
+          docker tag ${{ env.IMAGE }} ${{ env.IMAGE }}:${{ env.GITHUB_SHA_SHORT }}
+
+      - name: Push Docker Images
+        run: |
+          docker push ${{ env.IMAGE }}:${{ env.GITHUB_SHA_SHORT }}
+          docker push ${{ env.IMAGE }}:latest
