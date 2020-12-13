@@ -64,10 +64,10 @@ services:
       - fleet
     labels:
       - traefik.enable=true
-      - traefik.http.services.hello-world.loadbalancer.server.port=8080
-      - traefik.http.routers.hello-world.rule=Host(`fleet.example.org`)
-      - traefik.http.routers.hello-world.tls.certresolver=le
-      - traefik.http.routers.hello-world.entrypoints=websecure
+      - traefik.http.services.fleet.loadbalancer.server.port=8080
+      - traefik.http.routers.fleet.rule=Host(`fleet.example.org`)
+      - traefik.http.routers.fleet.tls.certresolver=le
+      - traefik.http.routers.fleet.entrypoints=websecure
       - traefik.docker.network=traefik-proxy
 
   redis:
