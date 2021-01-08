@@ -189,3 +189,4 @@ sudo systemctl restart docker
 ## References
 - [https://grafana.com/oss/loki/](https://grafana.com/oss/loki/)
 - [https://grafana.com/docs/loki/latest/clients/docker-driver/](https://grafana.com/docs/loki/latest/clients/docker-driver/)
+---

@@ -176,3 +176,4 @@ After a minute or so, your VM should be deployed. As you can see on the bottom l
 $ terraform output vm1_ipv4
 165.22.207.61
 ```
+---

@@ -126,5 +126,4 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s http
 chmod +x kubectl
 mv kubectl ~/.local/bin
 ```
-
-
+---

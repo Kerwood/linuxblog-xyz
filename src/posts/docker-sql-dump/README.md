@@ -21,3 +21,4 @@ docker exec -i [mysql_container_name] mysqldump -u root -p[root_password] [datab
 ```
 docker exec -i [mysql_container_name] mysql -u root -p[root_password] [database_name] < dumpfilename.sql
 ```
+---

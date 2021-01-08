@@ -75,3 +75,5 @@ Now add the the `next-server` and `boot-file` options to the network.
 
 ### Final notes
 Remember to configure your boot settings in the BIOS to be able to boot in Legacy mode.
+
+---

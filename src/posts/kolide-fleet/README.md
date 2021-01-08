@@ -131,3 +131,4 @@ Your client shoud now be visible in Fleet.
 ## References
 - [https://www.kolide.com/fleet/](https://www.kolide.com/fleet/)
 - [https://linuxblog.xyz/posts/traefik-2-docker-compose/](https://linuxblog.xyz/posts/traefik-2-docker-compose/)
+---

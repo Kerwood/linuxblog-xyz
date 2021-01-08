@@ -119,3 +119,5 @@ docker-compose restart
 
 An issue has been raised with the developer about this "design".
  [https://github.com/haiwen/seafile-docker/issues/182](https://github.com/haiwen/seafile-docker/issues/182)
+
+---

@@ -70,3 +70,4 @@ volumes:
 ### References
 - [https://github.com/Joxit/docker-registry-ui](https://github.com/Joxit/docker-registry-ui)
 - [https://hub.docker.com/_/registry](https://hub.docker.com/_/registry)
+---

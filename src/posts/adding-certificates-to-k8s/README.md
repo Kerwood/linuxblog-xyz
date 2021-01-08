@@ -50,3 +50,4 @@ You can verify the certificate with below command.
 ```
 echo | openssl s_client -showcerts -servername example.org -connect example.org:443 2>/dev/null | openssl x509 -inform pem -noout -text
 ``` 
+---

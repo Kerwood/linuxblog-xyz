@@ -114,3 +114,4 @@ signout_redirect_url = https://grafana.example.org/.pomerium/sign_out
 ## Reference
 - [https://grafana.com/docs/grafana/latest/auth/auth-proxy/](https://grafana.com/docs/grafana/latest/auth/auth-proxy/)
 - [https://grafana.com/docs/grafana/latest/permissions/organization_roles/](https://grafana.com/docs/grafana/latest/permissions/organization_roles/)
+---

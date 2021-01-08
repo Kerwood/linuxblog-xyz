@@ -232,3 +232,5 @@ Run `docker-compose up -d` to start the the Hello World app and Keycloak GateKee
 You should now be able to login to the Hello World app through Keycloak Gatekeeper.
 
 ![](./hello-world.png)
+
+---

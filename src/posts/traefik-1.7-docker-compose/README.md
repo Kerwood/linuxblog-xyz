@@ -126,3 +126,4 @@ services:
       - traefik.frontend.rule=Host:webapp.example.com
       - traefik.port=3000
 ```
+---
