@@ -7,8 +7,12 @@ type: post
 blog: true
 tags: [vpn, nebula]
 ---
-
 Nebula is a VPN mesh technology that Slack has created and later open sourced. It is absolutly great for creating an overlay network between nodes in different locations, whether it's Azure, Amazon, on-prem or in your garage. Even if your nodes are behind a NAT or firewall, Nebula will sprinkle som magic and punch a hole in that sucker.
+
+--- 
+
+[[toc]]
+
 
 [https://github.com/slackhq/nebula](https://github.com/slackhq/nebula)
 > Nebula is a scalable overlay networking tool with a focus on performance, simplicity and security. It lets you seamlessly connect computers anywhere in the world. Nebula is portable, and runs on Linux, OSX, Windows, iOS, and Android. It can be used to connect a small number of computers, but is also able to connect tens of thousands of computers.
