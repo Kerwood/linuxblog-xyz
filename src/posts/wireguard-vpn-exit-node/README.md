@@ -1,6 +1,6 @@
 ---
 title: Creating a WireGuard VPN exit node
-date: 2021-01-16 12:45:49
+date: 2021-01-24 12:45:49
 author: Patrick Kerwood
 excerpt: In this how-to I'll create a WireGuard VPN exit node, which is NAT'ing connections for clients. I will give an example on using both iptables and firewalld and how to forward ports to a WireGuard client.
 type: post
