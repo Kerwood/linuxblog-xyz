@@ -10,6 +10,9 @@ tags: [terraform, azure, kubernetes]
 
 In this tutorial we will create an AKS cluster including an Azure Container Registry and a public IP resource for the Ingress Controller with Terraform. There will also be a quick how-to on installing the NGINX Ingress Controller using the Public IP created.
 
+---
+
+[[toc]]
 ## Prerequisites
 
 First things first, install the tools needed for the job.
