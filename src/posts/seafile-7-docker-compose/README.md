@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [seafile, docker-compose, config]
 ---
-Below is my personal Docker Compose file for deloying Seafile. I'm running Seafile behind a Traefik proxy, as I do with all of my web applications.
+A Docker Compose configuration example on deploying Seafile. In this example I'll deploy it in a Traefik proxy network and with the appropriate Traefik labels.
 
 There are 3 services that make up Seafile. A MariaDB, Memcached key-value store and Seafile itsself. If you look closely, you can see that there are two networks, `traefik-proxy` which should exist and `seafile` which Docker Compose will create. All 3 services are added to the `seafile` network and the `seafile` service is also added to the already existing `traefik-proxy` network, for enabling Traefik to proxy traffic to the service.
 
@@ -85,12 +85,12 @@ volumes:
 After deploying above Docker Compose file, there is just one more thing you need to fix. Personally I would call it a bug, but according to the developer, its by design. The issue is that a couple of variable needs to be fixed for Seafile to get content.
 
 Open a shell in the `seafile` container.
-```
+```sh
 docker exec -it seafile bash
 ```
 
 Open `/opt/seafile/conf/ccnet.conf` file with `vi`. (Sorry peeps, only the `vi` editor is available in the container)
-```
+```sh
 vi /opt/seafile/conf/ccnet.conf
 ```
 
@@ -113,7 +113,7 @@ FILE_SERVER_ROOT = "https://cloud.example.org/seafhttp"
 ```
 
 Restart all Docker Compose services and you are good to go.
-```
+```sh
 docker-compose restart
 ```
 

@@ -2,16 +2,16 @@
 title: Traefik v2 Configuration with Let's Encrypt [TLS, DNS]
 date: 2020-07-20 11:13:48
 author: Patrick Kerwood
-excerpt: A Docker Compose configuration example with Traefik v2 including Let's Encrypt TLS/DNS validation.
+excerpt: This is a Docker Compose configuration example with Traefik v2 including Let's Encrypt TLS/DNS validation.
 type: post
 blog: true
 tags: [traefik, docker-compose, config]
 ---
-This is just a basic Docker Compose file with configuration for Traefik v2, including Let's Encrypt TLS/DNS validation exampels.
+This is a a Docker Compose configuration example with Traefik v2 including Let's Encrypt TLS/DNS validation.
 
 This configuration redirects `http` to `https` and requests certificates from Let's Encrypt. Just change `<your-email@goes-here.com>` to your mail address, create the `acme.json` file and change the path to the `acme.json` file.
 
-```bash
+```sh
 mkdir /home/traefik
 touch /home/traefik/acme.json
 chmod 600 /home/traefik/acme.json

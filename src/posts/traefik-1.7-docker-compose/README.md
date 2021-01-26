@@ -7,14 +7,14 @@ type: post
 blog: true
 tags: [traefik, docker-compose, config]
 ---
-This is just a basic Docker Compose file with configuration for Traefik v1.7.
+A Docker Compose configuration example with Traefik v1.7 including Let's Encrypt HTTP/DNS validation.
 
 At time of writing, Traefik v2 is out and introduces a number of breaking changes, so dont use this config for v2. Version 1.7 though is supported until end of 2021.
 
 
 This configuration redirects `http` to `https` and requests certificates from Let's Encrypt. Just change `<your-email@goes-here.com>` to your mail address, create the `acme.json` file and change the path to the `acme.json` file.
 
-```bash
+```sh
 mkdir /home/traefik
 touch /home/traefik/acme.json
 chmod 600 /home/traefik/acme.json

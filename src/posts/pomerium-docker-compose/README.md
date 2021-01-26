@@ -7,6 +7,7 @@ type: post
 blog: true
 tags: [pomerium, oidc, docker-compose]
 ---
+This tutorial is a how-to on setting up a Single Sign-on/OpenID Connect proxy with Pomerium, in front of your application using Docker Compose and Traefik.
 
 OpenID Connect is a great way of utilizing Single Sign-on to avoid managing local user accounts on your web application and/or enhancing security. I've used [Keycloak Gatekeeper](https://linuxblog.xyz/posts/keycloak-gatekeeper-open-id-connect/) before to achieve the same goal, but have stumbled upon Pomerium which solves the same challange but without having to maintain a Keycloak instance. That's what makes Pomerium a bit simpler and easier to maintain.
 
@@ -44,19 +45,19 @@ The thing with the policy is that it's multiline, but luckily the developers has
 
 Below is a simple example of a Pomerium policy. It forwards traffic from `https://hello.example.org` to the docker container `hello-world` on port `3000`. You can find more policy examples on their [documentation site.](https://www.pomerium.io/reference/#policy)
 
-```
+```yaml
 - from: https://hello.example.org
   to: http://hello-world:3000
   allowed_users:
     - user@example.org
 ```
 Save the policy as `policy.yml`, base64 encode it and save the output to the `POLICY` variable in the compose file.
-```
+```sh
 base64 -w 0 policy.yml
 ```
 
 Here's the example Docker Compose file.
-```yml{16-22,28}
+```yaml{16-22,28}
 version: "3.8"
 
 networks:

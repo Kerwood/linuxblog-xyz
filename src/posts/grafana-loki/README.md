@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [docker, docker-compose, loki]
 ---
-This tutorial is just a quick standard Loki config with the usual Docker Compose file.
+This is a tutorial using Docker Compose to setup Grafana with Loki and forwarding your logs from your running containers to Loki.
 
 Loki is a horizontally-scalable, highly-available, multi-tenant log aggregation system inspired by Prometheus. It is designed to be very cost effective and easy to operate. It does not index the contents of the logs, but rather a set of labels for each log stream.
 
@@ -16,7 +16,7 @@ Loki is a horizontally-scalable, highly-available, multi-tenant log aggregation 
 ## Loki configuration
 
 Below is a standard Loki configuration. Save it as `loki-config.yml` togehter with the `docker-compose.yml` file.
-```yml
+```yaml
 auth_enabled: false
 
 server:
@@ -86,7 +86,7 @@ ruler:
 ## Docker Compose
 As usual I have included the necessary Traefik configuration to set it up with my standard [Traefik setup.](https://linuxblog.xyz/posts/traefik-2-docker-compose/) 
 
-```yml{40}
+```yaml{40}
 version: "3.8"
 
 networks:
@@ -182,7 +182,7 @@ If you want to change the default log driver for all containers you'll need to e
 ```
 
 Restart Docker and all containers will now be shipping logs to Loki.
-```
+```sh
 sudo systemctl restart docker
 ```
 

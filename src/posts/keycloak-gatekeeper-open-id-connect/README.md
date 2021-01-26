@@ -21,7 +21,7 @@ The authentication flow is as follows:
 ## Docker Compose
 Below is an example Docker compose file to protect the unauthenticated hello-world application with GateKeeper.
 
-```yml
+```yaml
 version: "3"
 
 services:
@@ -64,7 +64,7 @@ services:
 ## Gatekeeper Global Options
 Below is the global options I have chosen for my standard setup, with some info that explains what it is.
 
-```
+```sh
 --discovery-url=https://your-keycloak-domain.org/auth/realms/your-realm-name
   # Discovery url to retrieve the openid configuration
   # [URL to your Keycloak realm]
@@ -148,7 +148,7 @@ You need to copy the secret and the client name you created, to the `docker-comp
 
 ![](./configure-user-2.png)
 
-```
+```sh
 --client-id=hello-world
 --client-secret=660c722a-b178-4d33-87c6-5973c4c4ee07
 ```
@@ -157,7 +157,7 @@ You need to copy the secret and the client name you created, to the `docker-comp
 
 ### Configure Audience Field
 Ok, so the next few steps are necessary or you will encounter below error in GateKeeper.
-```
+```sh
 unable to verify the id token	{"error": "oidc: JWT claims invalid: invalid claims, 'aud' claim and 'client_id' do not match, aud=account, client_id=hello-world"}
 ```
 
@@ -186,21 +186,21 @@ More information about Client Scopes and Audience can be found here.
 ### Configure Roles
 This is the part where you create the roles you assign to users, that gives access to what not. As you can see in the `docker-compose.yml` file, you can set fine grained access control with the `--resources` parameter.
 Here's a couple of exampels.
-```
+```sh
 --resources="uri=/admin*|roles=test1,test2"
 --resources="uri=/backend*|roles=test1"
 --resources="uri=/css/*|white-listed=true"
 --resources="uri=/img/*|white-listed=true"
 --resources="uri=/public/*|white-listed=true"
 ```
-```
+```sh
 --resources="uri=/admin*|roles=admin,root|require-any-role=true"
 --resources="uri=/public*|white-listed=true"
 --resources="uri=/authenticated/users|roles=user"
 ```
 
 In my `docker-compose.yml` file I only have below parameter, which means that a user only needs the `hello-world-access` role to gain access to the entire Hello World application.
-```
+```sh
 --resources="uri=/*|roles=hello-world-access"
 ```
 

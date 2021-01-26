@@ -7,6 +7,7 @@ type: post
 blog: true
 tags: [kolide, fleet, osquery, docker-compose]
 --- 
+A Docker Compose configuration example and a short how-to on getting Kolide Fleet and osquery up and running using the Fleet REST API.
 
 Fleet has a nice dashboard that enables you to do live queries, and effective management of osquery infrastructure. All you need on the clients is OS Query installed.
 
@@ -92,7 +93,7 @@ The above will install `osqueryctl`, `osqueryd` and `osqueryi`.
 
 Next, create the file `/etc/osquery/osquery.flags` and paste in the below lines. Remeber to change the `tls_hostname` to what ever you configured with Traefik.
 
-```bash{2}
+```sh{2}
 --enroll_secret_path=/etc/osquery/fleet_secret
 --tls_hostname=fleet.example.org
 --host_identifier=uuid
@@ -116,12 +117,12 @@ After logging in to the Fleet WebUI and hitting the "Add New Host" button, you w
 ![](./secret-osquery.png)
 
 Create the file `/etc/osquery/fleet_secret` containing only the enroll secret.
-```
+```sh
 Bv68Dtk8eyzdqIvHStJpu25K6w3zcbao
 ```
 
 Enable and start the osqueryd daemon.
-```
+```sh
 systemctl enable osqueryd
 systemctl start osqueryd
 ```

@@ -17,7 +17,7 @@ Because the Launcher is utilizing gRPC instead of REST, we need to setup Traefik
 Fleet needs be setup to use TLS, because of gRPC. It does not have to be a valid certificate, since it's just between Fleet and Traefik. So we're going to create a selfsigned certificate.
 
 We need to configure Traefik to skip verification on insecure certificates. If you configure Traefik with command line parameters, like I do, add below parameter to the `command` property of the Traefik service.
-```yml
+```yaml
 command:
   ...
   - --serverstransport.insecureskipverify=true
@@ -35,7 +35,7 @@ Then we'll have to make a few changes to the [original](https://linuxblog.xyz/po
  - Add volume mounts that points to the selfsigned certificate and key.
  - Add the `traefik.http.services.fleet.loadbalancer.server.scheme=https` label.
 
-```yml{14-16,18-20,27}
+```yaml{14-16,18-20,27}
 ...
   fleet:
     image: kolide/fleet:2.6.0
@@ -109,7 +109,7 @@ Built packages in /tmp/launcher-package217092028
 ```
 
 In that directory you will find a deb and a rpm package. When installing this package on a client it will install all necessary dependencies and will connect to Kolide Fleet.
-```
+```sh
 /tmp/launcher-package217092028 
 # ls -lh
 total 44M
@@ -118,12 +118,12 @@ total 44M
 ```
 
 Copy the launcher `deb` or `rpm` file to the host you want to inroll into Fleet and install it.
-```
+```sh
 yum install ./launcher.linux-systemd-rpm.rpm
 ```
 
 Verify.
-```
+```sh
 systemctl status launcher.launcher
 ```
 

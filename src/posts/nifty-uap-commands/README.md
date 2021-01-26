@@ -30,7 +30,7 @@ In the search box, just type ind `ssh` and select "Enable/Disable SSH Auth.." Th
 ## Get UAP information.
 The command `info` will surprisingly give you information about the UAP, including the inform address and if it's connected to the controller.
 
-```
+```sh
 UBNT-BZ.v4.3.13# info
 
 Model:       UAP-AC-LR
@@ -44,12 +44,12 @@ Status:      Connected (http://10.5.10.17:8080/inform)
 ```
 
 ## Getting device logs
-```
+```sh
 tail -f /var/log/messages
 ```
 
 ## Reset UAP to default configuration
-```
+```sh
 syswrapper.sh restore-default
 ```
 
@@ -57,7 +57,7 @@ syswrapper.sh restore-default
 
 If your UAP is on another L2 network than the controller, you will have to set the inform address manually. This can be done with below command.
 
-```
+```sh
 set-inform http://ip-of-controller:8080/inform
 ```
 

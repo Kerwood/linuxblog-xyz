@@ -17,18 +17,18 @@ This is a Docker Compose configuration on setting up a local container regestry.
 As usual, I use Traefik to handle my requests, certificates and also basic authentication in this example. Basic auth will also work with the Docker CLI.
 
 First, create one or more users with below command. 
-```
+```sh
 docker run --rm -it httpd echo $(htpasswd -nb username-here password-here) | sed -e s/\\$/\\$\\$/g
 ```
 
 The output is added to the basicauth middleware label as shown below. Comma-separate multiple users.
 
-```
+```yaml
 - traefik.http.middlewares.example-app.basicauth.users=user1:$$apr1$$6FAqLGzm$$Oc90rGLAKLTcskiiqY3hh1,user2:$$apr1$$6FAqLGzm$$Oc90rGLAKLTcskiiqY3hh1
 ```
 
 ## Docker Compose
-```{23,27}
+```yaml{23,27}
 version: '3.8'
 services:
   registry:

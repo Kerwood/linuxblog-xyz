@@ -7,6 +7,7 @@ type: post
 blog: true
 tags: [terraform, 'digital ocean']
 ---
+This is a quick how-to on creating a virtual machine in Digital Ocean also known as a Droplet, with Terraform
 
 First,
 - Go to the [Terraform download site](https://www.terraform.io/downloads.html) and grab the terraform binary for your operating system.
@@ -19,7 +20,7 @@ To work with Digital Ocean you must use [Terraform Digital Ocean Provider](https
 There are a few ways to work with this DO access token. One way is to export the token as an environmental variable and the Provider will pick it up by its self.
 
 Run the `export`command with your token.
-```bash
+```sh
 export DIGITALOCEAN_TOKEN=5015ae648ed7550611abe7a569...
 ```
 
@@ -61,7 +62,7 @@ For finding the last placeholders, we will use the official DO CLI tool `doctl`.
 Download the binary from [Github](https://github.com/digitalocean/doctl/releases), run `doctl auth init` and paste in the access token you created before.
 
 Next run below command to get a list of images. We will use `centos-7-x64`.
-```
+```sh
 $ doctl compute image list-distribution
 
 31354013    6.9 x32              snapshot    CentOS          centos-6-x32          true      20
@@ -87,7 +88,7 @@ $ doctl compute image list-distribution
 ```
 
 Same goes for region. Here we choose `ams3`.
-```
+```sh
 $ doctl compute region list
 
 Slug    Name               Available
@@ -103,7 +104,7 @@ blr1    Bangalore 1        true
 ```
 
 And last, the size. We choose `s-1vcpu-1gb`.
-```
+```sh
 $ doctl compute size list
 
 Slug               Memory    VCPUs    Disk    Price Monthly    Price Hourly
@@ -140,7 +141,7 @@ output "vm1_ipv4" {
 ```
 
 To deploy the server, you first have to initialize Terraform.
-```
+```sh
 $ tf terraform init
 
 Initializing the backend...
@@ -152,7 +153,7 @@ Initializing provider plugins...
 ```
 
 Run `terraform apply` to deploy the server.
-```
+```sh
 $ terraform apply
 ...
 digitalocean_droplet.vm1: Creating...
@@ -172,7 +173,7 @@ vm1_ipv4 = 165.22.207.61
 ```
 
 After a minute or so, your VM should be deployed. As you can see on the bottom line, the IP address is `165.22.207.61`. Which you also can get with the following command.
-```
+```sh
 $ terraform output vm1_ipv4
 165.22.207.61
 ```

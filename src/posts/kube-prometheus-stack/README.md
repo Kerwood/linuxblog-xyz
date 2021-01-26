@@ -56,7 +56,7 @@ The default username and password is `admin`/`prom-operator`.
 
 To reach the service from outside the cluster, you need to have an ingress controller and an ingress definition. Below is an example of an ingress definition with cert-manager configuration. The key parts here is that the definition needs to be in the same namespace as Prometheus and that the `serviceName` is `prometheus-grafana`.
 
-```yml{5,19}
+```yaml{5,19}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:

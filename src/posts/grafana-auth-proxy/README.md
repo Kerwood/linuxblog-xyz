@@ -7,6 +7,7 @@ type: post
 blog: true
 tags: [grafana, pomerium, oidc]
 ---
+Instead of managing a local user database in Grafana, you can let a reverse proxy handle the authentication and Grafana will create a user based on that login. In this example  I use Pomerium as the authenticating proxy.
 
 With Grafana you have the option to let a reverse proxy handle authentication to the application. To be fair, Grafana actually supports multiple [OAuth Providers](https://grafana.com/docs/grafana/latest/auth/) like Google, Azure, etc. but if you for some reason just want to use Pomerium, look no further.
 
@@ -16,7 +17,7 @@ I'm not going to go into setting up Pomerium, you can see [this post](https://li
 
 We need to ad `pass_identity_headers: true` to the Pomerium policy.
 
-```yml{3}
+```yaml{3}
 - from: https://grafana.example.org
   to: http://grafana:3000
   pass_identity_headers: true
@@ -30,7 +31,7 @@ If you have read my posts before you know that I like to configure my applicatio
 
 Remember to change the `GF_AUTH_SIGNOUT_REDIRECT_URL` variable to fit your URL.
 
-```yml{25,33,45,52}
+```yaml{25,33,45,52}
 version: "3.8"
 
 networks:

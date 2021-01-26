@@ -68,7 +68,7 @@ vim /etc/nebula/config.yml
 ```
 
 Change below lines to match the files that got moved to `/etc/nebula`.
-```yml
+```yaml
 pki:
   ca: /etc/nebula/ca.crt
   cert: /etc/nebula/lighthouse01.crt
@@ -76,13 +76,13 @@ pki:
 ```
 
 Comment out below lines. We dont need them.
-```yml
+```yaml
 # static_host_map:
 #   "192.168.100.1": ["100.64.22.11:4242"]
 ```
 
 Change the `am_lighthouse` property to `true` and comment out the IP address.
-```yml
+```yaml
 lighthouse:
   am_lighthouse: true
   interval: 60
@@ -91,7 +91,7 @@ lighthouse:
 ```
 
 The last part is the IP filter or firewall. You can keep it as is, but maybe comment out or delete the last rule.
-```yml
+```yaml
 firewall:
   conntrack:
     tcp_timeout: 12m
@@ -164,7 +164,7 @@ Now repeat the steps.
 Edit the config file which is a bit different than the Lighthouse config.
 
 Change the paths.
-```yml
+```yaml
 pki:
   ca: /etc/nebula/ca.crt
   cert: /etc/nebula/server1.crt
@@ -172,13 +172,13 @@ pki:
 ```
 
 Set a static host map. The `10.99.0.1` is the Nebula IP and the `x.x.x.x` is the public IP, both belonging to the Lighthouse node.
-```yml
+```yaml
 static_host_map:
   "10.99.0.1": ["x.x.x.x:4242"]
 ```
 
 Change the IP of the `hosts` property to the Nebula IP of the Lighthouse.
-```yml{5}
+```yaml{5}
 lighthouse:
   am_lighthouse: false
   interval: 60
@@ -187,7 +187,7 @@ lighthouse:
 ```
 
 Here's an optional step. If you have a lot of interfaces on your node, eg. if you use Docker, you can limit the interfaces that Nebula will try and initiate a handshake on.
-```yml
+```yaml
 lighthouse:
   ...
   local_allow_list:
@@ -196,7 +196,7 @@ lighthouse:
 ```
 
 Last step is to configure the firewall settings. They are pretty self explanatory, here's the example from the default config that allows TCP port 443 from any host with BOTH laptop and home groups.
-```yml
+```yaml
 firewall:
   ...
   inbound:

@@ -31,7 +31,7 @@ Login to Azure with the CLI tool and choose your working Subscription.
 
 Get the resource group ID and store it in the `RG_ID` variable.
 
-```
+```sh
 RG_ID=$(az group show -n <resourceGroupName> --query id -o tsv) && echo $RG_ID
 ```
 
@@ -41,7 +41,7 @@ Create a Service Principal with the Owner role on the resource group for Terrafo
 
 You need the `Application Developer`, or higher, role for creating the Service Principal.
 
-```
+```sh
 az ad sp create-for-rbac --name <servicePrincipalName> --role Owner --scopes=$RG_ID --years 99 -o json
 ```
 
@@ -49,7 +49,7 @@ You will get something simular to below.
 
 Take a note of the `appId` and `password`. You will not be able to get the password again.
 
-```
+```json
 {
   "appId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", # Terraform client_id
   "displayName": "servicePrincipalName",
@@ -63,7 +63,7 @@ Give the SP the `Network Contributor` role on the subnet you want to use. This i
 
 Get some ID's for the role assignment command. You can get the VNet values with `az network vnet list`.
 
-```
+```sh
 # Service Principal ID
 SP_ID=$(az ad sp list --display-name <servicePrincipalName> --query "[0].objectId" -o tsv) && echo $SP_ID
 
@@ -73,13 +73,13 @@ SUBNET_ID=$(az network vnet subnet show -n <subnetName> --vnet-name <vnetName> -
 
 Create the role assignment.
 
-```
+```sh
 az role assignment create --role="Network Contributor" --assignee $SP_ID --scope $SUBNET_ID
 ```
 
 Verify the role assignment.
 
-```
+```sh
 az role assignment list --assignee $SP_ID --all
 ```
 
@@ -314,25 +314,25 @@ acr_name = "acrname"  # Alphanumeric, no spaces, no hyphen, no caps.
 
 Initiate the provider.
 
-```
+```sh
 terraform init
 ```
 
 Run below command to start deploying. After about 5-10 minutes your cluster should be up and running.
 
-```
+```sh
 terraform apply
 ```
 
 After Terraform is complete, go ahead and get the credentials for the cluster.
 
-```
+```sh
 az aks get-credentials -n <clusterName> -g <clusterResourceGroup> -f kubeconfig
 ```
 
 Connect to the cluster.
 
-```
+```sh
 export KUBECONFIG=./kubeconfig
 kubectl get all --all-namespaces
 ```
@@ -343,19 +343,19 @@ When the AKS cluster was created a Service Principal, with the same name as the 
 
 We will use Terraform to get the AKS Service Principal ID.
 
-```
+```sh
 AKS_SP_ID=$(terraform output service-principal-id) && echo $AKS_SP_ID
 ```
 
 Reuse the `$SUBNET_ID` variable and create the assignment.
 
-```
+```sh
 az role assignment create --role="Network Contributor" --assignee $AKS_SP_ID --scope $SUBNET_ID
 ```
 
 Verify the role assignment.
 
-```
+```sh
 az role assignment list --assignee $AKS_SP_ID --all
 ```
 
@@ -365,27 +365,27 @@ This example uses Helm 3 for installing NGINX Ingress.
 
 Create the namespace for the Ingress Controller.
 
-```
+```sh
 kubectl create namespace nginx-ingress
 ```
 
 Add the `ingress-nginx` repo to Helm and update.
 
-```
+```sh
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 ```
 
 Before installing, we need the public IP we created and the resource group name. You can get those values from Terraform.
 
-```
+```sh
 IP=$(terraform output ingress-ip) && echo $IP
 RG=$(terraform output main-resource-group) && echo $RG
 ```
 
 Run the Helm install command after creating above variables. To pickup the Public IP resource in the resource group, we the add the two last lines to the install command.
 
-```{7,8}
+```sh{7,8}
 helm install nginx-ingress ingress-nginx/ingress-nginx \
     --namespace nginx-ingress \
     --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
@@ -400,7 +400,7 @@ Other parameters can be found here. [https://docs.nginx.com/nginx-ingress-contro
 
 Check that the LoadBalancer is ensured.
 
-```
+```sh
 $ kubectl describe service nginx-ingress-ingress-nginx-controller --namespace nginx-ingress
 ...
 Events:
@@ -414,7 +414,7 @@ Events:
 
 And check that the ingress server got the public IP.
 
-```
+```sh
 $ kubectl get service --namespace nginx-ingress
 ...
 NAME                                               TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
@@ -422,3 +422,5 @@ nginx-ingress-ingress-nginx-controller             LoadBalancer   10.0.84.146   
 ```
 
 Ref: [https://docs.microsoft.com/en-us/azure/aks/ingress-basic](https://docs.microsoft.com/en-us/azure/aks/ingress-basic)
+
+---
