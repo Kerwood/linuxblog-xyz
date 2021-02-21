@@ -33,7 +33,7 @@ Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 ```
 :::
 
-## Create Snapshots
+## Creating Snapshots
 Create an array with the VM objects you want to work with.
 ```sh
 $VMs = Get-VM -Name vm-name-01,vm-name-02,vm-name-03
@@ -44,7 +44,7 @@ Create a snapshot of the VMs with the name `before-upgrade`.
 $VMs | New-Snapshot -Name "before-upgrade"
 ```
 
-## List Snapshots
+## Listing Snapshots
 
 List snapshots.
 ```sh
@@ -56,7 +56,7 @@ List only the latests snapshots created.
 $VMs | Get-Snapshot | where {$_.IsCurrent -eq $true} 
 ```
 
-## Restore Snapshots
+## Restoring Snapshots
 
 Below command will restore the snaphot `before-upgrade` on each VM in the `$VMs` array. 
 ```sh
