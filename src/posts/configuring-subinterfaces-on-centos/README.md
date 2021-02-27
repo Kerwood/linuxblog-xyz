@@ -60,7 +60,7 @@ VLAN=yes
 ```
 
 Restart Network Manager to enable the interfaces.
-```
+```sh
 systemctl restart NetworkManager
 ```
 ---
