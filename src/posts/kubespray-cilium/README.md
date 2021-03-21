@@ -1,6 +1,6 @@
 ---
 title: Bare Metal Kubernetes install with Kubespray and Cilium
-date: 2021-03-12 20:01:22
+date: 2021-03-20 20:01:22
 author: Patrick Kerwood
 excerpt: In this post I will setup a bare metal Kubernetes cluster using Kubespray. At the same time I'll get rid of that pesky Kube Proxy and replace it with the eBPF based Cilium CNI. Since Docker is deprecated in Kubernetes v1.20 I will be installling containerd instead. This setup is tested on CentOS 8 Stream and Redhat Enterprise Linux 8.3.
 type: post
