@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [pomerium, oidc, docker-compose]
 ---
-This tutorial is a how-to on setting up a Single Sign-on/OpenID Connect proxy with Pomerium, in front of your application using Docker Compose and Traefik.
+{{ $frontmatter.excerpt }}
 
 OpenID Connect is a great way of utilizing Single Sign-on to avoid managing local user accounts on your web application and/or enhancing security. I've used [Keycloak Gatekeeper](https://linuxblog.xyz/posts/keycloak-gatekeeper-open-id-connect/) before to achieve the same goal, but have stumbled upon Pomerium which solves the same challange but without having to maintain a Keycloak instance. That's what makes Pomerium a bit simpler and easier to maintain.
 

@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [netboot, docker-compose, pxe]
 ---
-Netboot gives you the opportunity to boot various operating system installers or utilities using iPXE. It will load a list of all your favorite Linux distros and will pull a fresh image of your choosing, from the internet to boot. 
+{{ $frontmatter.excerpt }}
 
 This post is just a very simple Docker Compose example on Netboot. Theres nothing complicated about it, but its just really one of my favorite projects. It makes installing a new operating system or live booting a utility distro, a breeze.
 

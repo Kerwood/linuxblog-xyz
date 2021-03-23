@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [kubernetes, certificate]
 ---
-This is a quick tutorial on converting a PFX or PEM certificate to a key/crt pair and deploy it in Kubernetes as a TLS secret.
+{{ $frontmatter.excerpt }}
 
 Some times you got to add a static certificate to Kubernetes, the good old fashioned way. I had to do it the other day and I figured I'd document the steps needed. My Security team, who issued the certificate, delivered it as an encrypted PFX file.
 

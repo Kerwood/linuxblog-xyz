@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [kubernetes]
 ---
-This is an example on how to create a service account in Kubernetes, with a couple of role bindings. I'll also show how to create a kubeconfig file to use the service account with kubectl.
+{{ $frontmatter.excerpt }}
 
 
 Kubernetes comes with a set of built-in cluster roles, which you can limit to a specific namespace if you want. Use `kubectl get clusterroles` to get a list of roles and `kubectl describe clusterrole admin` to get the list of permissions for that role. You can also create your own custom roles, check out [Kubernetes RBAC documentation.](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)

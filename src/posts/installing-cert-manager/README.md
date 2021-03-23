@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [kubernetes, cert-manager, helm]
 ---
-Here's a quick how-to on installing Cert Manager in your Kubernetes cluster and setting up Issuers with Let's Encrypt HTTP and DNS validation. With Helm 3 the installation process is a breeze. 
+{{ $frontmatter.excerpt }}
 
 ## Prerequisites
 A prerequisite for installing Cert Manager with Helm is of course Helm. Go to the [Helm install docs](https://helm.sh/docs/intro/install/) and get a piece of that cake.

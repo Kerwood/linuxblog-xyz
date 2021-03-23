@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [terraform, 'digital ocean']
 ---
-This is a quick how-to on creating a virtual machine in Digital Ocean also known as a Droplet, with Terraform
+{{ $frontmatter.excerpt }}
 
 First,
 - Go to the [Terraform download site](https://www.terraform.io/downloads.html) and grab the terraform binary for your operating system.

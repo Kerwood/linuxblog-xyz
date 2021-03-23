@@ -6,7 +6,7 @@ excerpt: PowerCLI is a great tool to manage resources in VMware vCenter. It woul
 blog: true
 tags: [powershell, vmware]
 ---
-PowerCLI is a great tool to manage resources in VMware vCenter. It would be even better if it was a "real" CLI tool, instead of a Powershell module. I often use it for creating, restoring or deleting snapshots on multiple machines, usually when dealing with a cluster of some sort.
+{{ $frontmatter.excerpt }}
 
 ## Spinning up  PowerCLI
 First things first, let's get a Powershell environment. We all know that you can install Powershell on Linux by now, but I'm definitely not soiling my Fedora with Powershell. Luckly the PowerCLI team has made an official PowerCLI container with all included. 

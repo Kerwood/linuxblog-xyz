@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [traefik, docker-compose, config]
 ---
-This is a a Docker Compose configuration example with Traefik v2 including Let's Encrypt TLS/DNS validation.
+{{ $frontmatter.excerpt }}
 
 This configuration redirects `http` to `https` and requests certificates from Let's Encrypt. Just change `<your-email@goes-here.com>` to your mail address, create the `acme.json` file and change the path to the `acme.json` file.
 

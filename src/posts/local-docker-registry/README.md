@@ -8,7 +8,7 @@ blog: true
 tags: [docker-compose, registry]
 ---
 
-This is a Docker Compose configuration on setting up a local container regestry. It uses the official docker registry image and puts a simple WebUI in front with basic authentication.
+{{ $frontmatter.excerpt }}
 
 
 ![](./reg-ui.gif)

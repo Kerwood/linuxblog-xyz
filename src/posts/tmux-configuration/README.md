@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [tmux]
 ---
-This post is just a quick tutorial on setting up TMUX with my default configration.
+{{ $frontmatter.excerpt }}
 
 ![](./tmux.png)
 

@@ -2,13 +2,12 @@
 title: Keycloak Gatekeeper - OpenID Connect
 date: 2020-04-03 20:47:18
 author: Patrick Kerwood
-excerpt: This is a guide on how to deploy Keycloak Gatekeeper as a Docker container and setting it up to authenticate your users with Keycloak, using openid-connect.
+excerpt: In this guide I will deploy a Hello World application and a Keycloak Gatekeeper instance to add user authentication using OpenID Connect.
 type: post
 blog: true
 tags: [keycloak, gatekeeper, oidc, docker-compose]
 ---
-
-In this guide I will deploy a Hello World application and a Keycloak Gatekeeper instance to add user authentication using OpenID Connect.
+{{ $frontmatter.excerpt }}
 
 The authentication flow is as follows:
   - Your HTTP request to `hello-world.example.org` hits the GateKeeper proxy.

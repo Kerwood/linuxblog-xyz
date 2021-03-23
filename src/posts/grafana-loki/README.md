@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [docker, docker-compose, loki]
 ---
-This is a tutorial using Docker Compose to setup Grafana with Loki and forwarding your logs from your running containers to Loki.
+{{ $frontmatter.excerpt }}
 
 Loki is a horizontally-scalable, highly-available, multi-tenant log aggregation system inspired by Prometheus. It is designed to be very cost effective and easy to operate. It does not index the contents of the logs, but rather a set of labels for each log stream.
 

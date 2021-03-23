@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [kolide, fleet, osquery, docker-compose]
 --- 
-A Docker Compose configuration example and a short how-to on getting Kolide Fleet and osquery up and running using the Fleet REST API.
+{{ $frontmatter.excerpt }}
 
 Fleet has a nice dashboard that enables you to do live queries, and effective management of osquery infrastructure. All you need on the clients is OS Query installed.
 

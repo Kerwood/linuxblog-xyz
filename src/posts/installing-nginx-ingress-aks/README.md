@@ -7,7 +7,7 @@ blog: true
 tags: [nginx-ingress, aks]
 ---
 
-This is a guide on installing a NGINX Ingress controller on Azure Kubernetes Service.
+{{ $frontmatter.excerpt }}
 
 ## Prerequisites
 A prerequisite for installing NGINX Ingress with Helm is of course Helm. Go to the [Helm install docs](https://helm.sh/docs/intro/install/) and get a piece of that cake.

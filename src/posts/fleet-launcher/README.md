@@ -8,7 +8,7 @@ blog: true
 tags: [kolide, fleet, launcher]
 ---
 
-This is a follow up on the [Kolide Fleet + OS Query](https://linuxblog.xyz/posts/kolide-fleet/) post. In the previous post we installed Fleet and enrolled a server manually, by installing OS Query and setting it up. In this post, we are going to create a package that includes everything. The package will be using gRPC instead of the REST.
+{{ $frontmatter.excerpt }}
 
 ## Setting up Traefik
 

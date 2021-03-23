@@ -6,7 +6,7 @@ excerpt: In this post I will show you how to create subinterfaces on your CentOS
 blog: true
 tags: [network, centos]
 ---
-In this post I will show you how to create subinterfaces on your CentOS server. It's easy and only takes a couple of minutes to setup, after that just trunk your VLAN's with 802.1q to the server.
+{{ $frontmatter.excerpt }}
 
 I used CentOS 8 Stream as my OS, but any RHEL/CentOS related distribution will probably work just the same. I'll create two subinterfaces for VLAN 10 and 20. One will be with DHCP enabled and the other will be with a static IP configuration.
 

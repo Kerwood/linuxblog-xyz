@@ -7,7 +7,8 @@ type: post
 blog: true
 tags: [kubernetes]
 ---
-In this post I will setup a bare metal Kubernetes cluster using Kubespray. At the same time I'll get rid of that pesky Kube Proxy and replace it with the eBPF based Cilium CNI. Since Docker is deprecated in Kubernetes v1.20 I will be installling containerd instead. This setup is tested on CentOS 8 Stream and Redhat Enterprise Linux 8.3.
+
+{{ $frontmatter.excerpt }}
 
 The steps are as follows.
 [[toc]]

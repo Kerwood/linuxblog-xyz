@@ -8,7 +8,7 @@ blog: true
 tags: [ubiquiti, unifi]
 ---
 
-Every once in a while I need to troubleshoot Ubiquiti UAP's. And since I rarely do so, I forget the commands. This post is just a couple of commands for my own deteriorating memory.
+{{ $frontmatter.excerpt }}
 
 ## Enable SSH on the UAP's
 First step is to enable SSH on the UAP's. I believe it is disabled by default. Go to your Unifi controller Settings.

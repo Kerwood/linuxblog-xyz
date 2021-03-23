@@ -7,8 +7,7 @@ type: post
 blog: true
 tags: [fedora]
 ---
-
-A couple of years ago I installed Fedora on my laptop. And honestly I haven't looked back since, I absolutely love my Fedora desktop. This post is just a list of commands I use to install my applications after a fresh Fedora install, for my own deteriorating memory.
+{{ $frontmatter.excerpt }}
 
 ## Install RPM fusion
 

@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [traefik, docker-compose, config]
 ---
-A Docker Compose configuration example with Traefik v1.7 including Let's Encrypt HTTP/DNS validation.
+{{ $frontmatter.excerpt }}
 
 At time of writing, Traefik v2 is out and introduces a number of breaking changes, so dont use this config for v2. Version 1.7 though is supported until end of 2021.
 

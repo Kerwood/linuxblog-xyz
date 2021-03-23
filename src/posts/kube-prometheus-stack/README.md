@@ -8,7 +8,7 @@ blog: true
 tags: [kubernetes, prometheus, grafana, oauth2]
 ---
 
-In this post I will show you how to install the Kube Prometheus Stack in your Kubernetes cluster, which will give you 20+ Grafana dashboards to let you know everything about whats going on in your cluster. This installation process is extremely simple with Helm 3. I will also add some Grafana configuration to enable OAuth2 logins.
+{{ $frontmatter.excerpt }}
 
 ## Prerequisites
 All you need for this is the Helm 3 CLI and kubectl of course. 

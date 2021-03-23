@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [docker, sql]
 ---
-This is just two simple commands to backup and restore an active MySQL/MariaDB database running in a container.
+{{ $frontmatter.excerpt }}
 
 So basically, below command just a `mysqldump` command, but it saves the dump file on the host instead of in the container. I use these commands maybe more often than I'd like to admit, when backing up a private hosted SQL database.
 

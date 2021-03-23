@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [seafile, docker-compose, config]
 ---
-A Docker Compose configuration example on deploying Seafile. In this example I'll deploy it in a Traefik proxy network and with the appropriate Traefik labels.
+{{ $frontmatter.excerpt }}
 
 There are 3 services that make up Seafile. A MariaDB, Memcached key-value store and Seafile itsself. If you look closely, you can see that there are two networks, `traefik-proxy` which should exist and `seafile` which Docker Compose will create. All 3 services are added to the `seafile` network and the `seafile` service is also added to the already existing `traefik-proxy` network, for enabling Traefik to proxy traffic to the service.
 

@@ -7,7 +7,7 @@ type: post
 blog: true
 tags: [wireguard, vpn]
 ---
-In this how-to I'll create a WireGuard VPN exit node, which is NAT'ing connections for clients. I will give an example on using both iptables and firewalld and how to forward ports to a WireGuard client.
+{{ $frontmatter.excerpt }}
 
 --- 
 
