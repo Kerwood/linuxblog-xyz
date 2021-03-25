@@ -13,7 +13,7 @@ With Grafana you have the option to let a reverse proxy handle authentication to
 
 As usual I have include my default [Traefik configuration.](https://linuxblog.xyz/posts/traefik-2-docker-compose/)
 
-I'm not going to go into setting up Pomerium, you can see [this post](https://linuxblog.xyz/posts/pomerium/) for details on that. There are though a few extra things that we need to configure in Pomerium.
+I'm not going to go into setting up Pomerium, you can see [this post](https://linuxblog.xyz/posts/pomerium-docker-compose/) for details on that. There are though a few extra things that we need to configure in Pomerium.
 
 We need to ad `pass_identity_headers: true` to the Pomerium policy.
 
@@ -30,6 +30,8 @@ The second is is adding the `JWT_CLAIMS_HEADERS: email` environment variable to 
 If you have read my posts before you know that I like to configure my applications by environment variables, if possible, for easy portability. If you look at the `grafana` service in the compose file, you will see the environment variables that makes Pomerium authentication possible. The current role given to an authenticated users is `Admin`. Other possible roles are `Editor` or `Viewer`.
 
 Remember to change the `GF_AUTH_SIGNOUT_REDIRECT_URL` variable to fit your URL.
+
+Populate the `COOKIE_SECRET` variable with the output of `head -c32 /dev/urandom | base64`.
 
 ```yaml{25,33,45,52}
 version: "3.8"
