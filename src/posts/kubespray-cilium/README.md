@@ -6,6 +6,9 @@ excerpt: In this post I will setup a bare metal Kubernetes cluster using Kubespr
 type: post
 blog: true
 tags: [kubernetes]
+meta:
+  - name: description
+    content: Setup a Kubernetes cluster with Kubespray, using Cilium as the CNI.
 ---
 
 {{ $frontmatter.excerpt }}
