@@ -33,7 +33,7 @@ Remember to change the `GF_AUTH_SIGNOUT_REDIRECT_URL` variable to fit your URL.
 
 Populate the `COOKIE_SECRET` variable with the output of `head -c32 /dev/urandom | base64`.
 
-```yaml{25,33,45,52}
+```yaml{19,25,33,45,52}
 version: "3.8"
 
 networks:
