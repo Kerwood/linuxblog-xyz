@@ -6,6 +6,9 @@ excerpt: This is a tutorial using Docker Compose to setup Grafana with Loki and 
 type: post
 blog: true
 tags: [docker, docker-compose, loki]
+meta:
+- name: description
+  content: How to forward logs Docker containers to Grafana Loki.
 ---
 {{ $frontmatter.excerpt }}
 

@@ -2,10 +2,13 @@
 title: Local Container Registry
 date: 2020-09-08 20:01:22
 author: Patrick Kerwood
-excerpt: This is a Docker Compose configuration on setting up a local container regestry. It uses the official docker registry image and puts a simple WebUI in front with basic authentication.
+excerpt: This is a Docker Compose configuration on setting up a local container registry. It uses the official docker registry image and puts a simple WebUI in front with basic authentication.
 type: post
 blog: true
 tags: [docker-compose, registry]
+meta:
+- name: description
+  content: How to setup a local container registry with a simple WebUI.
 ---
 
 {{ $frontmatter.excerpt }}

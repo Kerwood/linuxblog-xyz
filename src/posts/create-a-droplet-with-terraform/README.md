@@ -6,6 +6,9 @@ excerpt: This is a quick how-to on creating a virtual machine in Digital Ocean a
 type: post
 blog: true
 tags: [terraform, 'digital ocean']
+meta:
+- name: description
+  content: How to create a Digital Ocean droplet with Terraform.
 ---
 {{ $frontmatter.excerpt }}
 

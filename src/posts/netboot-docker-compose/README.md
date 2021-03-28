@@ -6,6 +6,9 @@ excerpt: Netboot gives you the opportunity to boot various operating system inst
 type: post
 blog: true
 tags: [netboot, docker-compose, pxe]
+meta:
+- name: description
+  content: How to setup Netboot for installing various Linux distributions with iPXE.
 ---
 {{ $frontmatter.excerpt }}
 

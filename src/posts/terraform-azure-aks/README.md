@@ -6,6 +6,9 @@ excerpt: In this tutorial we will create an AKS cluster including an Azure Conta
 type: post
 blog: true
 tags: [terraform, azure, kubernetes]
+meta:
+- name: description
+  content: How to setup up an Azure Kubernetes cluster and ACR with Terraform.
 ---
 
 {{ $frontmatter.excerpt }}

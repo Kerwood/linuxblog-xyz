@@ -6,6 +6,9 @@ excerpt: In this guide I will deploy a Hello World application and a Keycloak Ga
 type: post
 blog: true
 tags: [keycloak, gatekeeper, oidc, docker-compose]
+meta:
+- name: description
+  content: How to install and setup a Keycloak instance and use Gatekeeper to manage authentication.
 ---
 {{ $frontmatter.excerpt }}
 

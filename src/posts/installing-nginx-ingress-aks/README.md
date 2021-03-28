@@ -5,6 +5,9 @@ author: Patrick Kerwood
 excerpt: This is a guide on installing a NGINX Ingress controller on Azure Kubernetes Service.
 blog: true
 tags: [nginx-ingress, aks]
+meta:
+- name: description
+  content: How to install a NGINX ingress controller in an AKS cluster.
 ---
 
 {{ $frontmatter.excerpt }}

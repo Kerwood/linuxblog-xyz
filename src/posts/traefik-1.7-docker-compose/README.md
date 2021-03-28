@@ -6,6 +6,9 @@ excerpt: A Docker Compose configuration example with Traefik v1.7 including Let'
 type: post
 blog: true
 tags: [traefik, docker-compose, config]
+meta:
+- name: description
+  content: How to setup Traefik v1.7 with Docker Compose (deprecated).
 ---
 {{ $frontmatter.excerpt }}
 

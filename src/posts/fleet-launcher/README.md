@@ -6,6 +6,9 @@ excerpt: This is a follow up on the "Kolide Fleet + OS Query" post. In the previ
 type: post
 blog: true
 tags: [kolide, fleet, launcher]
+meta:
+- name: description
+  content: How to create a OS Query Launcher package.
 ---
 
 {{ $frontmatter.excerpt }}

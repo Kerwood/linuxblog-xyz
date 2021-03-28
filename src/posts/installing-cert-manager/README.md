@@ -6,6 +6,9 @@ excerpt: Here's a quick how-to on installing Cert Manager in your Kubernetes clu
 type: post
 blog: true
 tags: [kubernetes, cert-manager, helm]
+meta:
+- name: description
+  content: How to install Cert Manager in Kubernetes and setup a Cluster Issuer.
 ---
 {{ $frontmatter.excerpt }}
 

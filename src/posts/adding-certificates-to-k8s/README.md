@@ -6,6 +6,9 @@ excerpt: This is a quick tutorial on converting a PFX or PEM certificate to a ke
 type: post
 blog: true
 tags: [kubernetes, certificate]
+meta:
+- name: description
+  content: How to convert a PFX/PEM certificate and deploy it to Kubernetes.
 ---
 {{ $frontmatter.excerpt }}
 

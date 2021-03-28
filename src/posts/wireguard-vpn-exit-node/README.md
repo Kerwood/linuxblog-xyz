@@ -6,6 +6,9 @@ excerpt: In this how-to I'll create a WireGuard VPN exit node, which is NAT'ing 
 type: post
 blog: true
 tags: [wireguard, vpn]
+meta:
+- name: description
+  content: How to setup a VPN exit node with WireGuard.
 ---
 {{ $frontmatter.excerpt }}
 

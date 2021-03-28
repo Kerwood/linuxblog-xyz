@@ -6,6 +6,9 @@ excerpt: A Docker Compose configuration example and a short how-to on getting Ko
 type: post
 blog: true
 tags: [kolide, fleet, osquery, docker-compose]
+meta:
+- name: description
+  content: How to install Kolide Fleet with OS Query.
 --- 
 {{ $frontmatter.excerpt }}
 

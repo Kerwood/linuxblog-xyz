@@ -6,6 +6,9 @@ excerpt: This is an example on how to create a service account in Kubernetes, wi
 type: post
 blog: true
 tags: [kubernetes]
+meta:
+- name: description
+  content: How to create a service account in Kubernetes.
 ---
 {{ $frontmatter.excerpt }}
 

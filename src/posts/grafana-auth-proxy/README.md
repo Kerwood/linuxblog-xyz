@@ -6,6 +6,9 @@ excerpt: Instead of managing a local user database in Grafana, you can let a rev
 type: post
 blog: true
 tags: [grafana, pomerium, oidc]
+meta:
+- name: description
+  content: How to use Pomerium as authenticating proxy for Grafana.
 ---
 {{ $frontmatter.excerpt }}
 

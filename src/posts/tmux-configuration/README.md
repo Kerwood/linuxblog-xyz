@@ -6,6 +6,9 @@ excerpt: This post is just a quick tutorial on setting up TMUX with my default c
 type: post
 blog: true
 tags: [tmux]
+meta:
+- name: description
+  content: Kerwood's personal TMUX configuration.
 ---
 {{ $frontmatter.excerpt }}
 

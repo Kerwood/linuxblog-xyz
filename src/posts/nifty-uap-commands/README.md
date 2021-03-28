@@ -6,6 +6,9 @@ excerpt: Every once in a while I need to troubleshoot Ubiquiti UAP's. And since 
 type: post
 blog: true
 tags: [ubiquiti, unifi]
+meta:
+- name: description
+  content: A few troubleshooting commands for Ubiquiti UAP's.
 ---
 
 {{ $frontmatter.excerpt }}

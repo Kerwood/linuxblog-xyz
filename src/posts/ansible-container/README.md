@@ -5,6 +5,9 @@ author: Patrick Kerwood
 excerpt: When working with Ansible I really don't want to soil my laptop with Python. And why would I when running tasks inside a container is such as breeze. Combining that with aliases, you can run ansible commands as if it was installed locally.
 blog: true
 tags: [ansible]
+meta:
+- name: description
+  content: How to run ansible in a local container seamlessly.
 ---
 {{ $frontmatter.excerpt }}
 

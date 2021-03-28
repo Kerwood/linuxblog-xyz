@@ -6,6 +6,9 @@ excerpt: A Docker Compose configuration example on deploying Seafile. In this ex
 type: post
 blog: true
 tags: [seafile, docker-compose, config]
+meta:
+- name: description
+  content: How to setup Seafile using Docker Compose.
 ---
 {{ $frontmatter.excerpt }}
 

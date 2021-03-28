@@ -6,6 +6,9 @@ excerpt: This tutorial is a how-to on setting up a Single Sign-on/OpenID Connect
 type: post
 blog: true
 tags: [pomerium, oidc, docker-compose]
+meta:
+- name: description
+  content: How to setup Pomerium as an OIDC authentication proxy in front of any web application.
 ---
 {{ $frontmatter.excerpt }}
 

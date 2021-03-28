@@ -6,6 +6,9 @@ excerpt: Nebula is a VPN mesh technology that Slack has created and later open s
 type: post
 blog: true
 tags: [vpn, nebula]
+meta:
+- name: description
+  content: How to setup a VPN Mesh network with Slack Nebula.
 ---
 {{ $frontmatter.excerpt }}
 

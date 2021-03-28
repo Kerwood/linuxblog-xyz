@@ -5,6 +5,9 @@ author: Patrick Kerwood
 excerpt: This is a guide on installing a NGINX Ingress controller on a managed Digital Ocean Kubernetes cluster.
 blog: true
 tags: [nginx-ingress, 'digital ocean']
+meta:
+- name: description
+  content: How to install a NGINX ingress controller in a Digital Ocean Kubernetes cluster.
 ---
 {{ $frontmatter.excerpt }}
 

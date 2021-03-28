@@ -6,6 +6,9 @@ excerpt: This is a Docker Compose configuration example with Traefik v2 includin
 type: post
 blog: true
 tags: [traefik, docker-compose, config]
+meta:
+- name: description
+  content: How to setup Traefik v2 and Let's Encrypt with Docker Compose.
 ---
 {{ $frontmatter.excerpt }}
 

@@ -6,6 +6,9 @@ excerpt: A couple of years ago I installed Fedora on my laptop. And honestly I h
 type: post
 blog: true
 tags: [fedora]
+meta:
+- name: description
+  content: Kerwood's personal Fedora Desktop install notes.
 ---
 {{ $frontmatter.excerpt }}
 

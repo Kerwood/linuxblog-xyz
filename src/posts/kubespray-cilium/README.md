@@ -7,8 +7,8 @@ type: post
 blog: true
 tags: [kubernetes]
 meta:
-  - name: description
-    content: Setup a Kubernetes cluster with Kubespray, using Cilium as the CNI.
+- name: description
+  content: How to setup a Kubernetes bare metal cluster with Kubespray, using Cilium as the CNI.
 ---
 
 {{ $frontmatter.excerpt }}

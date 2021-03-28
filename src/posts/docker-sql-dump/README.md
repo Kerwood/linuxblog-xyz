@@ -6,6 +6,9 @@ excerpt: This is just two simple commands to backup and restore an active MySQL/
 type: post
 blog: true
 tags: [docker, sql]
+meta:
+- name: description
+  content: How to backup or restore an MySQL/MariaDB database running in a container.
 ---
 {{ $frontmatter.excerpt }}
 

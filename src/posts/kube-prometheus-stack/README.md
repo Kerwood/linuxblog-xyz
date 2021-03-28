@@ -6,6 +6,9 @@ excerpt: In this post I will show you how to install the Kube Prometheus Stack i
 type: post
 blog: true
 tags: [kubernetes, prometheus, grafana, oauth2]
+meta:
+- name: description
+  content: How to install and setup the Kube Prometheus Stack in a Kubernetes cluster.
 ---
 
 {{ $frontmatter.excerpt }}
