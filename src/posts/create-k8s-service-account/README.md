@@ -77,7 +77,7 @@ kubectl config view --flatten --minify
 
 Get the service account token.
 ```sh
-kubectl --namespace default get secret $(kubectl -n default get secret | grep my-service-account | awk '{print $1}') -o json | jq -r '.data.token' | base64 -d
+kubectl --namespace default get secret $(kubectl -n default get secret | grep my-service-account | awk '{print $1}') -o jsonpath={.data.token} | base64 -d
 ```
 
 Replace the gathered information with the placeholders in below example and your're good to go. 
@@ -106,7 +106,7 @@ Below is some bash commands to store the values in variables and generate the ku
 NAMESPACE="default" # Change me
 SA_NAME="my-service-account" # Change me
 
-SA_TOKEN=$(kubectl --namespace $NAMESPACE get secret $(kubectl --namespace $NAMESPACE get secret | grep $SA_NAME | awk '{print $1}') -o json | jq -r '.data.token' | base64 -d)
+SA_TOKEN=$(kubectl --namespace $NAMESPACE get secret $(kubectl --namespace $NAMESPACE get secret | grep $SA_NAME | awk '{print $1}') -o jsonpath={.data.token} | base64 -d)
 CONFIG=$(kubectl config view --flatten --minify -o json | jq '.clusters[0]')
 CLUSTER_NAME=$(echo $CONFIG | jq '.name')
 SERVER_URL=$(echo $CONFIG | jq '.cluster.server')
