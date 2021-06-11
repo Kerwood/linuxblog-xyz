@@ -2,7 +2,7 @@
 title: Bare Metal Kubernetes install with Kubespray and Cilium
 date: 2021-03-20 20:01:22
 author: Patrick Kerwood
-excerpt: In this post I will setup a bare metal Kubernetes cluster using Kubespray. At the same time I'll get rid of that pesky Kube Proxy and replace it with the eBPF based Cilium CNI. Since Docker is deprecated in Kubernetes v1.20 I will be installling containerd instead. This setup is tested on CentOS 8 Stream and Redhat Enterprise Linux 8.3.
+excerpt: In this post I will setup a bare metal Kubernetes cluster using Kubespray. At the same time I'll get rid of that pesky Kube Proxy and replace it with the eBPF based Cilium CNI. Since Docker is deprecated in Kubernetes v1.20 I will be installling containerd instead. This setup is tested on CentOS 8 Stream and Redhat Enterprise Linux 8.4.
 type: post
 blog: true
 tags: [kubernetes]
@@ -44,20 +44,20 @@ Or, you cloud install Ansible and the Kubespray dependencies locally: [https://g
 
 ## Configuring Kubespray
 
-Clone the kubespray repository. You can go ahead and clone the master branch if you want, personally I like to use a specific version. At the time of writing the newest version of Kubespray is `v2.15.0` which is the one I will be using.
+Clone the kubespray repository. You can go ahead and clone the master branch if you want, personally I like to use a specific version. At the time of writing the newest version of Kubespray is `v2.16.0` which is the one I will be using.
 
-Kubespray `v2.15.0` will give you the following.
+Kubespray `v2.16.0` will give you the following.
 
- - Kubernetes `v1.19.7`
+ - Kubernetes `v1.20.7`
  - Etcd `3.4.13`
- - Containerd `1.3.9`
+ - Containerd `1.4.4`
  - CoreDNS `1.7.0`
- - Nodelocaldns `1.16.0`
- - Kubernetes Dashboard `v2.1.0`
+ - Nodelocaldns `1.17.1`
+ - Kubernetes Dashboard `v2.2.0`
 
 
 ```sh
-git clone --branch v2.15.0 https://github.com/kubernetes-sigs/kubespray
+git clone --branch v2.16.0 https://github.com/kubernetes-sigs/kubespray
 cd kubespray
 ```
 
@@ -71,10 +71,10 @@ Now lets make a few changes to it.
 
 Below commands will do exactly that in the `inventory/sample` folder.
 ```sh
-sed -i -r 's/^(kube_network_plugin:).*/\1 cni/g' inventory/sample/group_vars/k8s-cluster/k8s-cluster.yml
-sed -i -r 's/^(container_manager:).*/\1 containerd/g' inventory/sample/group_vars/k8s-cluster/k8s-cluster.yml
+sed -i -r 's/^(kube_network_plugin:).*/\1 cni/g' inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
+sed -i -r 's/^(container_manager:).*/\1 containerd/g' inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
 sed -i -r 's/^(etcd_deployment_type:).*/\1 host/g' inventory/sample/group_vars/etcd.yml
-echo "kube_proxy_remove: true" >> inventory/sample/group_vars/k8s-cluster/k8s-cluster.yml
+echo "kube_proxy_remove: true" >> inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
 ```
 
 ### Building your inventory
@@ -151,7 +151,7 @@ ansible-playbook -i inventory/sample/hosts.yml cluster.yml -b -v
 ```
 
 ## Installing Cilium with Helm
-For the next step, you can either work from a master node (kubectl is installed and ready to go), or you can grab the kubeconfig file from `/etc/kubernetes/admin.conf` on a master and use it on your local machine.
+For the next step, you can either work from a master node (kubectl is installed and ready to go), or you can grab the kubeconfig file from `/etc/kubernetes/admin.conf` on a master and use it on your local machine, remember to change `server: https://127.0.0.1:6443` to you masters public IP or Load Blancer IP. 
 
 What ever you do, you'll need to install Helm for the next step.
 
@@ -163,7 +163,7 @@ helm repo update
 
 Run below command to install Cilium and Hubble.
 ```sh
-helm install cilium cilium/cilium --version 1.9.4 \
+helm install cilium cilium/cilium --version 1.10.0 \
   --namespace kube-system \
   --set kubeProxyReplacement=strict \
   --set k8sServiceHost=127.0.0.1 \
@@ -178,7 +178,7 @@ helm install cilium cilium/cilium --version 1.9.4 \
 Cilium has a testing manifest that deploys various resources to test different scenarios. At the time of writing two of the network policies will fail due to the test not being updated with `nodelocaldns`. If you are interested in how the network policies work, you can try and fix them.
 ```sh
 kubectl create ns cilium-test
-kubectl apply -n cilium-test -f https://raw.githubusercontent.com/cilium/cilium/v1.9.4/examples/kubernetes/connectivity-check/connectivity-check.yaml
+kubectl apply -n cilium-test -f https://raw.githubusercontent.com/cilium/cilium/v1.10.0/examples/kubernetes/connectivity-check/connectivity-check.yaml
 ```
 
 Have a look at the pods and see which ones are failing.
