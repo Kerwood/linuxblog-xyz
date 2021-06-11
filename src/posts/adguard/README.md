@@ -51,8 +51,8 @@ services:
       - 53:53/tcp
       - 53:53/udp
     volumes:
-      adguard-data:/opt/adguardhome/work
-      adguard-config:/opt/adguardhome/conf
+      - adguard-data:/opt/adguardhome/work
+      - adguard-config:/opt/adguardhome/conf
     labels:
       - traefik.enable=true
       - traefik.http.services.adguard.loadbalancer.server.port=3000
