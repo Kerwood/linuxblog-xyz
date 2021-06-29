@@ -2,7 +2,7 @@
 title: Bare Metal Kubernetes install with Kubespray and Cilium
 date: 2021-03-20 20:01:22
 author: Patrick Kerwood
-excerpt: In this post I will setup a bare metal Kubernetes cluster using Kubespray. At the same time I'll get rid of that pesky Kube Proxy and replace it with the eBPF based Cilium CNI. Since Docker is deprecated in Kubernetes v1.20 I will be installling containerd instead. This setup is tested on CentOS 8 Stream and Redhat Enterprise Linux 8.4.
+excerpt: In this post I will setup a bare metal Kubernetes cluster using Kubespray. At the same time I'll get rid of that pesky Kube Proxy and replace it with the eBPF based Cilium CNI. Since Docker is deprecated in Kubernetes v1.20 we will be installling Containerd or CRI-O instead. This setup is tested on CentOS 8 Stream and Redhat Enterprise Linux 8.4.
 type: post
 blog: true
 tags: [kubernetes]
@@ -40,7 +40,7 @@ RUN set -x && \
 
 Build the image and add the alias' like in the post.
 
-Or, you cloud install Ansible and the Kubespray dependencies locally: [https://github.com/kubernetes-sigs/kubespray#ansible](https://github.com/kubernetes-sigs/kubespray#ansible) 
+Or, you could install Ansible and the Kubespray dependencies locally: [https://github.com/kubernetes-sigs/kubespray#ansible](https://github.com/kubernetes-sigs/kubespray#ansible) 
 
 ## Configuring Kubespray
 
@@ -51,6 +51,7 @@ Kubespray `v2.16.0` will give you the following.
  - Kubernetes `v1.20.7`
  - Etcd `3.4.13`
  - Containerd `1.4.4`
+ - CRI-O `1.20`
  - CoreDNS `1.7.0`
  - Nodelocaldns `1.17.1`
  - Kubernetes Dashboard `v2.2.0`
@@ -65,16 +66,32 @@ I will be using the `inventory/sample` folder for the configuration, you can cop
 
 Now lets make a few changes to it.
  - Change the `kube_network_plugin` to `cni` in the `k8s-cluster.yml` file.
- - Set the `container_manager` to `containerd` in the `k8s-cluster.yml` file.
- - Set `etcd_deployment_type` to `host` in the `etcd.yml` file. This is a dependency by contaierd.
+ - Set `etcd_deployment_type` to `host` in the `etcd.yml` file.
  - Add the `kube_proxy_remove: true` variable to `k8s-cluster.yml` file to disable Kube Proxy.
 
-Below commands will do exactly that in the `inventory/sample` folder.
 ```sh
 sed -i -r 's/^(kube_network_plugin:).*/\1 cni/g' inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
-sed -i -r 's/^(container_manager:).*/\1 containerd/g' inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
 sed -i -r 's/^(etcd_deployment_type:).*/\1 host/g' inventory/sample/group_vars/etcd.yml
 echo "kube_proxy_remove: true" >> inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
+```
+
+**If you want to use containerd you need to.**
+ - Set the `container_manager` to `containerd` in the `k8s-cluster.yml` file.
+
+```sh
+sed -i -r 's/^(container_manager:).*/\1 containerd/g' inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
+```
+
+**If you want to use cri-o you need to.**
+ - Add `download_container: false` and `skip_downloads: false` to `all.yml`.
+ - Set the `container_manager` to `crio` in the `k8s-cluster.yml` file.
+ - Change the `crio_conmon` path in `redhat.yml`. This should hopefully not be needed in the future. [#7690](https://github.com/kubernetes-sigs/kubespray/issues/7690)
+
+```sh
+echo "download_container: false" >> inventory/sample/group_vars/all/all.yml
+echo "skip_downloads: false" >> inventory/sample/group_vars/all/all.yml
+sed -i -r 's/^(container_manager:).*/\1 crio/g' inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
+sed -i -r 's/^(crio_conmon:).*/\1 \/usr\/bin\/conmon/g' roles/container-engine/cri-o/vars/redhat.yml
 ```
 
 ### Building your inventory
