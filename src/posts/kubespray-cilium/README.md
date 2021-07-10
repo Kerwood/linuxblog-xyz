@@ -75,14 +75,14 @@ sed -i -r 's/^(etcd_deployment_type:).*/\1 host/g' inventory/sample/group_vars/e
 echo "kube_proxy_remove: true" >> inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
 ```
 
-**If you want to use containerd you need to.**
+**If you want to use containerd do the following.**
  - Set the `container_manager` to `containerd` in the `k8s-cluster.yml` file.
 
 ```sh
 sed -i -r 's/^(container_manager:).*/\1 containerd/g' inventory/sample/group_vars/k8s_cluster/k8s-cluster.yml
 ```
 
-**If you want to use cri-o you need to.**
+**If you want to use cri-o do the following.**
  - Add `download_container: false` and `skip_downloads: false` to `all.yml`.
  - Set the `container_manager` to `crio` in the `k8s-cluster.yml` file.
  - Change the `crio_conmon` path in `redhat.yml`. This should hopefully not be needed in the future. [#7690](https://github.com/kubernetes-sigs/kubespray/issues/7690)
