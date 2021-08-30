@@ -54,7 +54,7 @@ To get that `Server booted successfully` message, you need to setup your server 
 
 Install `fping` with your package manager. `fping` will send a single ping package and if its a success, exit with `0` and if not, greater than `0`. I wrote a oneliner that loops until a ping is successful and after that fires the webhook.
 
-Write the oneliner to a crontab file and your server will hit that webhook the next time it boots. You might need to change the path to `fping` depending på your distribution, use `which fping`.
+Write the oneliner to a crontab file and your server will hit that webhook the next time it boots. You might need to change the path to `fping` depending på your distribution, use `which fping`. Remember to add your webhook URL to end of the command.
 
 ```sh
 cat << EOF > /etc/cron.d/discord-webhook
