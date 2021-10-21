@@ -20,7 +20,7 @@ Port `8080` is used for device discovery and communication, without it your devi
 I'v seen a lot of different guides on which ports to open in a firewall or forward to, but basically you just need port `8080` and a port for the webinterface.
 This is the minimum setup and will be sufficient for most use cases.
 
-There is no official container image from Ubiquiti. There are two popular unofficial images, one if from [linuxserver.io](https://hub.docker.com/r/linuxserver/unifi-controller) and the other is from [jacobalberty](https://hub.docker.com/r/jacobalberty/unifi).
+There is no official container image from Ubiquiti. But there are two popular unofficial images, one is from [linuxserver.io](https://hub.docker.com/r/linuxserver/unifi-controller) and the other is from [jacobalberty](https://hub.docker.com/r/jacobalberty/unifi).
 I have been using `jacobalberty` for years and never had issues with that one, so I'm sticking with that.
 
 ## Docker Compose
