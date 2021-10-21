@@ -2,7 +2,7 @@
 title: Setting up a UniFi Controller
 date: 2021-10-21 11:53:15
 author: Patrick Kerwood
-excerpt: This is a Docker Compose configuration example on deploying ab UniFi Controller.
+excerpt: This is a Docker Compose configuration example on deploying a UniFi Controller.
 type: post
 blog: true
 tags: [docker-compose]
