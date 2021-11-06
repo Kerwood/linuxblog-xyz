@@ -6,8 +6,8 @@ excerpt: In this tutorial I will setup Pomerium as an authentication proxy, with
 blog: true
 tags: [pomerium, oidc, kubernetes]
 meta:
-- name: description
-  content: How to setup Pomerium as OIDC auth proxy for Kubernetes. 
+  - name: description
+    content: How to setup Pomerium as OIDC auth proxy for Kubernetes.
 ---
 
 {{ $frontmatter.excerpt }}
@@ -23,12 +23,14 @@ I guess a work around could be to make sure the id token only contains a single 
 :::
 
 ## Prerequisites
+
 For this tutorial you will need the following.
- - A working Kubernetes cluster with:
-   - An ingress controller installed.
-   - Cert Manager installed or a trusted certificate.
- - A Pomerium supported OIDC Provider - [check them out here.](https://www.pomerium.com/docs/identity-providers/)
- - A domain name for Pomerium. In this tutorial I will be using `kubeapi.example.org`. Point the domain name to your ingress controller IP.
+
+- A working Kubernetes cluster with:
+  - An ingress controller installed.
+  - Cert Manager installed or a trusted certificate.
+- A Pomerium supported OIDC Provider - [check them out here.](https://www.pomerium.com/docs/identity-providers/)
+- A domain name for Pomerium. In this tutorial I will be using `kubeapi.example.org`. Point the domain name to your ingress controller IP.
 
 ## Identity provider details
 
@@ -37,7 +39,6 @@ I will be using Google as my identity provider and therefore I've followed [thes
 When creating your client you will need to add a callback URL. Use `https://<your-domain>/oauth2/callback`, eg. `https://kubeapi.example.org/oauth2/callback`.
 
 Which ever provider you choose, you should end up with a client ID and secret.
-
 
 ## Setting up the Pomerium Service Account
 
@@ -58,7 +59,7 @@ metadata:
   name: pomerium-impersonation
 rules:
   - apiGroups:
-      - ""
+      - ''
     resources:
       - users
       - groups
@@ -66,7 +67,7 @@ rules:
     verbs:
       - impersonate
   - apiGroups:
-      - "authorization.k8s.io"
+      - 'authorization.k8s.io'
     resources:
       - selfsubjectaccessreviews
     verbs:
@@ -86,7 +87,7 @@ subjects:
     namespace: default
 ```
 
-Next create the role binding that binds the role `cluster-admin` to your OIDC username/email. 
+Next create the role binding that binds the role `cluster-admin` to your OIDC username/email.
 
 ::: tip Tip
 The username/email is case-sensitive. You can go to `https://kubeapi.example.org/.pomerium`, when you've reached the end of this tutorial, to see all the user claims you get from your IDP if you need to troubleshoot.
@@ -106,32 +107,41 @@ subjects:
     kind: User
     name: my-email@example.org
 ```
-## Create a Pomerium policy
 
-Get the Pomerium service account secret, which will be used in the Pomerium policy.
+## Create a Pomerium route
+
+Get the Pomerium service account secret, which will be used in the Pomerium route.
+
 ```sh
 SECRET_NAME=$(kubectl get serviceaccount/pomerium -o jsonpath="{.secrets[0].name}")
 kubectl get secret $SECRET_NAME -o jsonpath={.data.token} | base64 -d
 ```
 
-Save below policy to a file and change it to fit your needs.
- - The first line `- from:` is the URL to you want to use for the KubeAPI/kubectl.
- - The `allowed_domains` is just normal policy rules which you can find [here.](https://www.pomerium.io/reference/#policy) Personally I just use my email domain name.
- - Insert the service account secret on the last line.
+Save below route to a file and change it to fit your needs.
 
-```yaml{1,5,7}
+- The first line `- from:` is the URL to you want to use for the KubeAPI/kubectl.
+- Set the `kubernetes_service_account_token` to token you extracted above.
+- The `policy` defines who gets access. In this case the user with the email `user@example.com` or any user with an email in the `example.org` domain. You can find more examples [here.](https://www.pomerium.io/reference/#routes)
+
+```yaml{5}
 - from: https://kubeapi.example.org
   to: https://kubernetes.default.svc
   tls_skip_verify: true
   allow_spdy: true
-  allowed_domains:
-    - example.org
-  kubernetes_service_account_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6I.....
+  kubernetes_service_account_token: eyJhbGciOiJSUzI1NiIsImtpZCI6I.....
+  policy:
+    - allow:
+        or:
+          - email:
+              is: user@example.com
+          - domain:
+              is: example.org
 ```
 
-Save the policy and create a base64 encoded string from it. We will use that in the next step.
+Save the route and create a base64 encoded string from it. We will use that in the next step.
+
 ```sh
-base64 -w 0 policy.yml
+base64 -w 0 routes.yml
 ```
 
 ## Deploying Pomerium
@@ -144,7 +154,7 @@ There's a few environment variables in the deployment spec we need to set.
 - Create a base64 encoded string for the `COOKIE_SECRET` with `head -c32 /dev/urandom | base64 -w 0`.
 - Set the `IDP_PROVIDER` and `IDP_PROVIDER_URL`.
 - Set `IDP_CLIENT_ID` and `IDP_CLIENT_SECRET`.
-- Paste in the encoded policy string you created in the `POLICY` variable.
+- Paste in the encoded route string you created in the `ROUTES` variable.
 
 ```yaml{26-39}
 apiVersion: apps/v1
@@ -184,11 +194,12 @@ spec:
               value: <client-id-here>
             - name: IDP_CLIENT_SECRET
               value: <client-secret-here>
-            - name: POLICY
+            - name: ROUTES
               value: LSBmcm9tOiBodHRwczovL2xpbm9k...
 ```
 
 The service is pretty standard, nothing to change here.
+
 ```yaml
 apiVersion: v1
 kind: Service
