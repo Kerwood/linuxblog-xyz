@@ -7,13 +7,15 @@ type: post
 blog: true
 tags: [traefik, docker-compose, config]
 meta:
-- name: description
-  content: How to setup Traefik v1.7 with Docker Compose (deprecated).
+  - name: description
+    content: How to setup Traefik v1.7 with Docker Compose (deprecated).
 ---
+
 {{ $frontmatter.excerpt }}
 
-At time of writing, Traefik v2 is out and introduces a number of breaking changes, so dont use this config for v2. Version 1.7 though is supported until end of 2021.
-
+::: warning
+Traefik v1.7 is deprecated and will be unsupported by the end of 2021. Use [Traefik v2](/posts/traefik-2-docker-compose/) instead.
+:::
 
 This configuration redirects `http` to `https` and requests certificates from Let's Encrypt. Just change `<your-email@goes-here.com>` to your mail address, create the `acme.json` file and change the path to the `acme.json` file.
 
@@ -24,6 +26,7 @@ chmod 600 /home/traefik/acme.json
 ```
 
 ## With Let's Encrypt HTTP validation
+
 ```yaml{21,31}
 version: "3.7"
 networks:
@@ -59,9 +62,11 @@ services:
 ```
 
 ## With Let's Encrypt DNS validation
+
 Below is the a Docker Compose example with Let's Encrypt DNS validation. Your domain name needs to be hosted by a supported DNS provider. You can get a list of supported providers [here.](https://docs.traefik.io/v1.7/configuration/acme/#provider)
 
 In the example below, I'm using Digital Ocean as DNS provider and in the list linked above, I can see that I need a `DO_AUTH_TOKEN` environment variable with a valid API token/key.
+
 ```yaml{21,26,29}
 version: "3.7"
 networks:
@@ -101,16 +106,18 @@ services:
 ```
 
 ## Label your containers
+
 Add labels to your containers to make Traefik proxy traffic to them. Also they need to be in the `traefik-proxy` network.
 
 ```yaml
-    labels:
-      - traefik.enable=true
-      - traefik.frontend.rule=Host:webapp.example.com
-      - traefik.port=3000
+labels:
+  - traefik.enable=true
+  - traefik.frontend.rule=Host:webapp.example.com
+  - traefik.port=3000
 ```
 
 Below is a Hello World example. As you can see, I expose port 3000. It dosen't really do anything, but I like that you can see the ports this container is listing on.
+
 ```yaml
 version: '3.7'
 
@@ -129,4 +136,5 @@ services:
       - traefik.frontend.rule=Host:webapp.example.com
       - traefik.port=3000
 ```
+
 ---
