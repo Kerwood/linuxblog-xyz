@@ -75,3 +75,9 @@ Confluence Updater needs some parameters to run. Add below variables to the pipe
 - `CU_FQDN` - The FQDN to your Confluence Cloud instance eg. `your-domain.atlassian.net`
 
 Save your pipeline and run it.
+
+## References
+
+- [https://github.com/Kerwood/confluence-updater](https://github.com/Kerwood/confluence-updater)
+
+---
