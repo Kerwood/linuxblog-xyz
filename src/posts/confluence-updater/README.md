@@ -63,7 +63,6 @@ steps:
       chmod +x confluence-updater
       ./confluence-updater update -u $(CU_USER) -s $(CU_SECRET) --fqdn $(CU_FQDN)
     displayName: 'Update Confluence Page'
-´´´
 ```
 
 Commit the changes and push it to the repository. In Azure DevOps, press the `Set up build` button to create the new pipeline.
