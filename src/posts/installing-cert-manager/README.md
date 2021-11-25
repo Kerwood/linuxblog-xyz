@@ -45,7 +45,7 @@ Below is is an example of a `ClusterIssuer`, named `le-http01`, that uses HTTP-0
 Change the `email` property, save below yaml to a file and apply it to your cluster.
 
 ```yaml{7}
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: le-http01
