@@ -27,12 +27,12 @@ Create a namespace for Cert Manager.
 kubectl create namespace cert-manager
 ```
 
-Before installing, go to the [install docs](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm) under *"Option 2: install CRDs as part of the Helm release"*, get the latests version from the example and replace it in the example below.
+Before installing, go to the [install docs](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm), verify the latest version and replace it in the example below.
 ```sh
 helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v1.1.0 \
+  --version v1.6 \
   --set installCRDs=true
 ```
 
