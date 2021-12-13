@@ -50,16 +50,6 @@ sudo dnf -y install brave-browser
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
-For Tilix add below to ~/.bashrc or ~/.zshrc
-
-> At time of writing, Tilix has a [minor bug](https://github.com/gnunn1/tilix/issues/1954) in Fedora 33. 
-
-```sh
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte.sh
-fi
-```
-
 ## Setup Flatpak
 
 <https://flatpak.org/setup/Fedora/>
@@ -71,22 +61,14 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 ## Install Flatpaks
 
 ```sh
-flatpak install -y discord spotify slack bitwarden
+flatpak install -y discord spotify slack
 ```
 
 ## Ulauncher
 
-<https://ulauncher.io/#Download>
-
-```sh
-http -d https://github.com/Ulauncher/Ulauncher/releases/download/5.8.1/ulauncher_5.8.1_fedora32.rpm
-sudo dnf install ulauncher_5.8.1_fedora32.rpm
+Ulauncher is part of Fedora Repos.
 ```
-**Fix blank properties bug.**
-
-Find simlar line below in `/usr/share/applications/ulauncher.desktop` and replace it.
-```sh
-Exec=env WEBKIT_DISABLE_COMPOSITING_MODE=1 GDK_BACKEND=x11 /usr/bin/ulauncher --hide-window
+sudo dnf install ulauncher
 ```
 
 **Fix Wayland keybind.**
@@ -96,7 +78,7 @@ Exec=env WEBKIT_DISABLE_COMPOSITING_MODE=1 GDK_BACKEND=x11 /usr/bin/ulauncher --
 
 > Install package wmctrl (needed to activate app focus)
 > Open Ulauncher Preferences and set hotkey to something you'll never use
-> Open OS Settings > Devices > Keyboard > Add Hotkey > Scroll all the way down > Click +
+> Open Gnome Settings > Keyboard > View and Customize Shortcuts > Custom Shortcuts > Click +
 > In Command enter ulauncher-toggle, set name and shortcut, then click Add
 
 
