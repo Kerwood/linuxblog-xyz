@@ -59,15 +59,17 @@ sudo dnf install \
   exa \
   the_silver_searcher \
   papirus-icon-theme \
-  flameshot
+  flameshot \
+  zsh
 ```
 ## Dot files
 
 Get the configuration files for the various applications.
 ```sh
-git clone https://github.com/Kerwood/i3-dot-files.git ~/.config
-cd ~/.config/i3-dot-files
-./
+cd ~/.config
+git clone https://github.com/Kerwood/i3-dot-files.git
+cd ./i3-dot-files
+./create-symlinks.sh
 ```
 
 ## Install Nerd Fonts
@@ -83,7 +85,17 @@ unzip FiraCode.zip -d Nerd\ Fonts
 unzip Hack.zip -d Nerd\ Fonts
 
 # Move the fonts
-sudo mv Nerd\ Fonts ~/Documents
+sudo mv Nerd\ Fonts /usr/share/fonts
+
+# Remove
+rm FiraCode.zip
+rm Hack.zip
+```
+
+## Install Oh My Zsh
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
 ## Natural Scrolling.
@@ -102,12 +114,7 @@ EndSection
 
 <https://github.com/betterlockscreen/betterlockscreen>
 
-Remove the official `i3lock` package as it is not supported by Betterlockscreen.
-```sh
-sudo dnf remove i3lock
-```
-
-Download this fork of i3lock, it is an inplace replacement form and add to .local/bin
+Download this fork of i3lock. Betterlockscreen is dependent on it. Just dont uninstall the original i3lock. I had issues unlocking with the correct password after removeing it.
 ```sh
 http -d https://github.com/Raymo111/i3lock-color/releases/latest/download/i3lock
 chmod +x i3lock
@@ -116,7 +123,7 @@ sudo mv i3lock /usr/local/bin
 
 Download Betterlockscreen.
 ```sh
-http -d betterlockscreen https://github.com/betterlockscreen/betterlockscreen/blob/next/betterlockscreen
+http -d -o betterlockscreen https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/next/betterlockscreen
 chmod +x betterlockscreen
 sudo mv betterlockscreen /usr/local/bin
 ```
@@ -133,10 +140,25 @@ betterlockscreen -u ~/Pictures/background.jpg
 ```
 
 ## Install TPL 
-
+<https://linrunner.de/tlp/>
 ```sh
 sudo dnf install https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc$(rpm -E %fedora).noarch.rpm
 sudo dnf install tlp acpi_call
+```
+
+## Install Slick Greeter
+<https://github.com/linuxmint/slick-greeter>
+
+Change the background path to fit your needs.
+
+```sh
+sudo dnf install slick-greeter
+
+cat << EOF >>  /etc/lightdm/slick-greeter.conf
+background=/usr/share/backgrounds/default.png
+show-a11y=false
+show-keyboard=false
+EOF
 ```
 
 ## Setup Flatpak
@@ -144,13 +166,13 @@ sudo dnf install tlp acpi_call
 <https://flatpak.org/setup/Fedora/>
 
 ```sh
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
 Install Flatpaks
 
 ```sh
-flatpak install -y discord spotify slack
+flatpak install -y discord spotify
 ```
 
 
