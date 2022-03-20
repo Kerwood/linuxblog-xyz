@@ -26,7 +26,7 @@ Note: bind `flameshot gui` to what ever keybind in Gnome settings. Config comman
 Note: Peek requires "GNOME on Xorg", at time of writing, to work.
 
 ```sh
-sudo dnf -y install httpie bat git jq exa ncdu the_silver_searcher zsh vim filezilla flameshot gnome-tweaks papirus-icon-theme arc-theme remmina tilix celluloid peek ffmpeg
+sudo dnf -y install httpie bat git jq exa ncdu the_silver_searcher zsh vim filezilla flameshot gnome-tweaks papirus-icon-theme arc-theme remmina tilix celluloid peek ffmpeg gnome-extensions-app
 ```
 
 ## Install Sublime text
