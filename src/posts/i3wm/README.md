@@ -141,9 +141,21 @@ betterlockscreen -u ~/Pictures/background.jpg
 
 ## Install TPL 
 <https://linrunner.de/tlp/>
+
+TLP packages are available from the official Fedora repositories.
+
+ - `tlp` – Power saving
+ - `tlp-rdw` – optional – [Radio Device Wizard](https://linrunner.de/tlp/settings/rdw.html)
+
 ```sh
-sudo dnf install https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc$(rpm -E %fedora).noarch.rpm
-sudo dnf install tlp acpi_call
+dnf install tlp tlp-rdw
+```
+
+```sh
+systemctl enable tlp.service
+
+# You should also mask the following services to avoid conflicts and assure proper operation of TLP’s Radio Device Switching options.
+systemctl mask systemd-rfkill.service systemd-rfkill.socket
 ```
 
 ## Install Slick Greeter
@@ -192,3 +204,7 @@ gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
 ```
+
+```sh
+sudo dnf install code
+``` 
