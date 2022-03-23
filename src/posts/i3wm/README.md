@@ -148,7 +148,7 @@ TLP packages are available from the official Fedora repositories.
  - `tlp-rdw` – optional – [Radio Device Wizard](https://linrunner.de/tlp/settings/rdw.html)
 
 ```sh
-dnf install tlp tlp-rdw
+sudo dnf install tlp tlp-rdw
 ```
 
 ```sh
@@ -192,9 +192,7 @@ flatpak install -y discord spotify
 
 ```sh
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-```
 
-```sh
 cat << EOF | sudo tee /etc/yum.repos.d/vscode.repo
 [code]
 name=Visual Studio Code
@@ -203,8 +201,6 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
-```
 
-```sh
 sudo dnf install code
 ``` 
