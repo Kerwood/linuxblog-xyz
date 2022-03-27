@@ -16,7 +16,7 @@ meta:
 Below is a `Dockerfile` that creates an image with Flexget that can be used transparently like a normal command.
 
 ```
-FROM python:3.9-alpine
+FROM python:3.10-alpine
 
 ARG FLEXGET_UID
   
@@ -38,7 +38,7 @@ ENTRYPOINT ["/usr/local/bin/flexget"]
 Save the file and build the image with below build command. The flexget user inside the container will get a user ID of `1000`. If you're not sure why you should change it, just leave it.
 
 ```sh
-docker build --build-arg FLEXGET_UID=1000 ARG-HERE -t flexget .
+docker build --build-arg FLEXGET_UID=1000 -t flexget .
 ```
 
  ## Run example
