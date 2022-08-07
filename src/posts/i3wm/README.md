@@ -60,6 +60,7 @@ sudo dnf install \
   the_silver_searcher \
   papirus-icon-theme \
   flameshot \
+  ffmpeg-libs \
   zsh
 ```
 ## Dot files
