@@ -73,8 +73,8 @@ Flags: D - dynamic
 ```
 Now add the the `next-server` and `boot-file` options to the network.
 ```
-/ip dhcp-server network set 0 next-server="'10.0.0.27'"
-/ip dhcp-server network set 0 boot-file-name="'netboot.xyz.kpxe'"
+/ip dhcp-server network set 0 next-server="10.0.0.27"
+/ip dhcp-server network set 0 boot-file-name="netboot.xyz.kpxe"
 ```
 
 ### Final notes
