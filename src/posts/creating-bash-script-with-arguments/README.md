@@ -6,8 +6,8 @@ excerpt: When creating a good bash script for others to use, it's important to c
 blog: true
 tags: [bash]
 meta:
-- name: description
-  content: How to create a bash script with commandline arguments.
+  - name: description
+    content: How to create a bash script with commandline arguments.
 ---
 
 {{ $frontmatter.excerpt }}
@@ -35,6 +35,7 @@ usage() {
 SLEEP=60
 
 while [ $# -gt 0 ] ; do
+  # If you an argument without a value, like a boolean, do "shift 1" instead.
   case $1 in
     -s | --sleep-seconds) SLEEP="$2"; shift 2 ;;
     -e | --exit-code) EXIT="$2"; shift 2 ;;
