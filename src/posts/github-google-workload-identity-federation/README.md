@@ -140,12 +140,12 @@ This option gives a bit more flexibility and enables you to have multiple pipeli
 same Google service account if you want.
 
 Below command creates the needed policy binding and binds it to whatever JWT token from the "github" identity pool that
-has the `repository` attribute set with a value of `<repo-owner>/<repo-user>`.
+has the `repository` attribute set with a value of `<repo-owner>/<repo-name>`.
 
 ```sh
 gcloud iam service-accounts add-iam-policy-binding $SA_NAME@$G_PROJECT_ID.iam.gserviceaccount.com \
   --role roles/iam.workloadIdentityUser \
-  --member principalSet://iam.googleapis.com/$POOL_NAME/attribute.repository/<repo-owner>/<repo-user>
+  --member principalSet://iam.googleapis.com/$POOL_NAME/attribute.repository/<repo-owner>/<repo-name>
 ```
 
 That's it.
