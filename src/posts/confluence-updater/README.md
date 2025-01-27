@@ -18,22 +18,20 @@ In this blog post I will show the few easy steps to do exacly that. I will be us
 
 The first step is to create the actual pages in Confluence, in the location you want. Confluence Updater can only update an existing page. Write down the page ID, you will find it in the URL of the page.
 
-In your repository, create a file named `confluence-config.yaml` with below content. Confluence Updater will read this file and .... well it's pretty self explanatory, have a look at it.
+In your repository, create a file named `confluence-updater.yaml` with below content. Confluence Updater will read this file and .... well it's pretty self explanatory, have a look at it.
 
 You will need to add an entry for each file you want to update.
 
 ```yml
-content:
-  - filePath: './README.md'
-    title: My fancy documentation
-    pageId: '<page-id>'
-    contentType: page
+pages:
+  - filePath: ./README.md
+    overrideTitle: My fancy documentation
+    pageId: <page-id>
     labels:
       - ci/cd
-  - filePath: './docs/some-documentation.md'
-    title: My fancy documentation
-    pageId: '<page-id>'
-    contentType: page
+
+  - filePath: ./docs/some-documentation.md
+    pageId: <page-id>
     labels:
       - ci/cd
 ```
@@ -59,9 +57,9 @@ pool:
 
 steps:
   - bash: |
-      curl -L https://github.com/Kerwood/confluence-updater/releases/download/v1.0.0/confluence-updater-x86_64-unknown-linux-musl -o confluence-updater
+      curl -L https://github.com/Kerwood/confluence-updater/releases/latest/download/confluence-updater-x86_64-unknown-linux-musl -o confluence-updater
       chmod +x confluence-updater
-      ./confluence-updater update -u $(CU_USER) -s $(CU_SECRET) --fqdn $(CU_FQDN)
+      ./confluence-updater -u $(CU_USER) -s $(CU_SECRET) --fqdn $(CU_FQDN)
     displayName: 'Update Confluence Page'
 ```
 
