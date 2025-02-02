@@ -1,28 +1,36 @@
 ---
 title: Confluence Updater
-date: 2021-11-16 22:12:14
+date: 2025-02-02 19:12:14
 author: Patrick Kerwood
-excerpt: If you like to keep your documentation in Git, love writing in markdown but are somehow required to deliver documentation in Confluence, look no further. With Confluence Updater you can build a CI/CD pipeline to render a markdown page to html on change and upload it to Confluence Cloud.
+excerpt: If you prefer keeping your documentation in Git, love writing in Markdown, but need to publish it in Confluence, Confluence Updater is the perfect solution. This tool allows you to set up a CI/CD pipeline that automatically converts Markdown to HTML and uploads it to Confluence Cloud whenever changes are made.
 blog: true
-tags: [tool]
+tags: [tool, git]
 meta:
   - name: description
-    content: How to updated a Confluence page from a mardown page in Git.
+    content: How to updated a Confluence page from a Markdown file in Git.
 ---
 
 {{ $frontmatter.excerpt }}
 
-Confluence Updater is a tool I created in Rust because I had a requirement to deliver documentation in Confluence Cloud. I love writing in markdown, even this blog I do in markdown, and I'm a big fan of GitOps and the idea of using Git as a single source of truth.
 
-In this blog post I will show the few easy steps to do exacly that. I will be using Azure DevOps (_God forbid_), but any CI/CD pipeline will do.
+I created [Confluence Updater](https://github.com/Kerwood/confluence-updater) to meet a requirement
+for delivering documentation in Confluence Cloud. As someone who enjoys writing in Markdown, including this very blog,
+and values GitOps as a single source of truth, I wanted a streamlined way to bridge the gap.
 
-The first step is to create the actual pages in Confluence, in the location you want. Confluence Updater can only update an existing page. Write down the page ID, you will find it in the URL of the page.
+In this post, I’ll walk you through a few simple steps to achieve exactly that.
 
-In your repository, create a file named `confluence-updater.yaml` with below content. Confluence Updater will read this file and .... well it's pretty self explanatory, have a look at it.
+## confluence-updater.yaml
+The first step is to create the required pages in Confluence at your desired location.
+**Confluence Updater can only update existing pages**, so you’ll need to set them up manually.
+Be sure to note the page ID, which you can find in the page's URL.
 
-You will need to add an entry for each file you want to update.
+Next, in your repository, create a file named `confluence-updater.yaml` with the configuration tailored to your needs.
+Confluence Updater will read this file and update each Confluence page with its corresponding Markdown file.
 
-```yml
+If your Markdown file starts with an `h1` header, Confluence Updater will automatically remove it and use it as the page title.
+Alternatively, you can override the title using the `overrideTitle` property, regardless, the `h1` header will still be removed from the page.
+
+```yml{3}
 pages:
   - filePath: ./README.md
     overrideTitle: My fancy documentation
@@ -36,11 +44,28 @@ pages:
       - ci/cd
 ```
 
-Next create a file named `azure-pipelines.yml` and add below yaml code to it. The logic is very simple, when ever a change is commited to `README.md` or any file in the `docs` folder, the pipeline will run.
+## Github Actions
+If you're using GitHub Workflows, there's a GitHub Action available.
+Simply add the following action to your workflow file to use it.
 
-Change the version number in the `curl` command to fit the newest version.
+```yaml
+- name: Confluence Updater
+  uses: kerwood/confluence-updater-action@v1
+  with:
+    fqdn: your-domain.atlassian.net
+    user: ${{ secrets.USER }}
+    api_token: ${{ secrets.API_TOKEN }}
+```
 
-```yml{17,19}
+Add your Atlassian username and API token as secrets on the repository.
+
+See [kerwood/confluence-updater-action](https://github.com/Kerwood/confluence-updater-action) for more details.
+
+## Other CI/CD tools
+If you're not using Github, just add a step in your pipeline that downloads the latest or a specific version of
+`confluence-updater` and run it. Below example is for a Azure DevOps pipeline.
+
+```yaml{19}
 name: Confluence Updater
 
 trigger:
@@ -59,22 +84,19 @@ steps:
   - bash: |
       curl -L https://github.com/Kerwood/confluence-updater/releases/latest/download/confluence-updater-x86_64-unknown-linux-musl -o confluence-updater
       chmod +x confluence-updater
-      ./confluence-updater -u $(CU_USER) -s $(CU_SECRET) --fqdn $(CU_FQDN)
+      ./confluence-updater -u $(CU_USER) -s $(CU_SECRET) --fqdn your-domain.atlassian.net
     displayName: 'Update Confluence Page'
 ```
 
-Commit the changes and push it to the repository. In Azure DevOps, press the `Set up build` button to create the new pipeline.
 
-Confluence Updater needs some parameters to run. Add below variables to the pipeline by pressing the `Variables` button, remember to set `CU_SECRET` as a secret variable.
+Add below variables to the pipeline, remember to set `CU_SECRET` as a secret variable.
 
 - `CU_USER` - Your confluence user.
 - `CU_SECRET` - Your API token which you can generate [here.](https://id.atlassian.com/manage-profile/security/api-tokens)
-- `CU_FQDN` - The FQDN to your Confluence Cloud instance eg. `your-domain.atlassian.net`
-
-Save your pipeline and run it.
 
 ## References
 
 - [https://github.com/Kerwood/confluence-updater](https://github.com/Kerwood/confluence-updater)
+- [https://github.com/Kerwood/confluence-updater-action](https://github.com/Kerwood/confluence-updater-action)
 
 ---
