@@ -5,17 +5,16 @@ author: Patrick Kerwood
 excerpt: A Docker Compose configuration example with Traefik v1.7 including Let's Encrypt HTTP/DNS validation.
 type: post
 blog: true
-tags: [traefik, docker-compose, config]
+tags: [traefik, docker-compose]
 meta:
   - name: description
     content: How to setup Traefik v1.7 with Docker Compose (deprecated).
 ---
+::: warning
+Traefik v1 is **deprecated**. See [this post instead.](/posts/traefik-3-docker-compose/)
+:::
 
 {{ $frontmatter.excerpt }}
-
-::: warning
-Traefik v1.7 is deprecated and will be unsupported by the end of 2021. Use [Traefik v2](/posts/traefik-2-docker-compose/) instead.
-:::
 
 This configuration redirects `http` to `https` and requests certificates from Let's Encrypt. Just change `<your-email@goes-here.com>` to your mail address, create the `acme.json` file and change the path to the `acme.json` file.
 
