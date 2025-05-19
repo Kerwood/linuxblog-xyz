@@ -405,6 +405,6 @@ docker compose up -d
 - [OAuth2 Proxy Docs](https://oauth2-proxy.github.io/oauth2-proxy/)
 - [OAuth2 Proxy Docs: Integration](https://oauth2-proxy.github.io/oauth2-proxy/configuration/integration/)
 - [Traefik Docs](https://doc.traefik.io/traefik/providers/docker/)
-- [Github Issue: Not redirecting to subpath after login using Traefik's 401 errors middleware](https://cloud.google.com/iam/docs/workload-identity-federation#conditions)
+- [Github Issue: Not redirecting to subpath after login using Traefik's 401 errors middleware](https://github.com/oauth2-proxy/oauth2-proxy/issues/1297#issuecomment-2004788570)
 
 ---
