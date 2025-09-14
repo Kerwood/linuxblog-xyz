@@ -128,6 +128,7 @@ POOL_NAME=$(gcloud iam workload-identity-pools describe github --location global
 ```
 
 You have a couple of options for the `--member` argument.  
+
 If you want to bind the policy to the required, unique and immutable `google.subject` attribute you mapped, you will
 have to use the `principal://` like en below example.
 
