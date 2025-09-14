@@ -5,7 +5,7 @@ author: Patrick Kerwood
 excerpt: Setting up authentication for pushing images to Google Artifact Registry from a Github pipeline is usually done by creating a static, forever valid, credential file for at service account, which will probably never be rotated. An alternative to that is to use Workload Identity Federation to exchange a Github issued JWT token with a Google token and use that for authentication.
 type: post
 blog: true
-tags: [github, oidc]
+tags: [github, oidc, google]
 meta:
   - name: description
     content: Setting up Workload Identity Federation between Github and Google Cloud.
