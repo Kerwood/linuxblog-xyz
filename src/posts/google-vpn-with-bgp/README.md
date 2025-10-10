@@ -15,7 +15,13 @@ meta:
 
 {{ $frontmatter.excerpt }}
 
-### VPN Options in Google Cloud
+---
+
+While the Table of Contents seems a bit overwhelming at first glance, the second-level sections are relatively short.
+
+[[toc]]
+
+## VPN Options in Google Cloud
 Google Cloud offers two types of VPN:
 - **Classic VPN**: Supports only a single tunnel and static routing.
 - **HA VPN**: Supports multiple redundant tunnels for high availability, and requires the BGP routing protocol for dynamic route exchange.
