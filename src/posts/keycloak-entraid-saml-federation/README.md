@@ -126,8 +126,14 @@ If you’re not using Keycloak groups but still want Entra ID group assignments 
 you can achieve this by storing the Entra ID group list as user attributes in Keycloak. Then, within a client scope,
 you can expose these attributes as a claim (commonly named groups).
 
-If you’ve configured Entra ID to include all user group memberships in the token, there’s no native way in Keycloak to filter
+If you’ve configured Entra ID to include all user group memberships in the token, there’s no *native* way in Keycloak to filter
 or limit these groups. As a result, all group assignments will be included in the Keycloak access token.
+
+::: tip Update
+I created a custom Keycloak mapper that filters user attributes before adding them to a claim, ensuring that only the groups you actually need are included in the token.
+
+You can find it here: [https://github.com/Kerwood/keycloak-user-attribute-filter](https://github.com/Kerwood/keycloak-user-attribute-filter) 
+:::
 
 We use the same approach as before with the **Attribute Importer**, except the claim name/URL is bit different.
 Instead of mapping to an existing user attribute, we create a custom attribute.
@@ -149,9 +155,16 @@ The **Unmanaged Attributes** option must be enabled under **Realm Settings** bef
 Next, we need to create a client scope that can be attached to a Keycloak client.
 This scope will map the `entraid_groups` user attribute to the `groups` claim in the access token.
 
+You have two options here, use the native **User Attribute** mapper or the custom mapper I developed,
+which allows filtering values using a specified regular expression.
+If you want to filter the group claim, you must [install the custom mapper](https://github.com/Kerwood/keycloak-user-attribute-filter) first.
+
 - In the Keycloak Admin Console, go to **Client scopes** and click **Create client scope**.
 - Name it `entraid_groups` and set the **Type** to **Default** if you want this scope to be automatically applied to all new clients.
 - Leave the protocol as **OpenID Connect** and click **Save**.
+
+**Option 1: Configuring the Native Mapper**
+
 - Open the **Mappers** tab and click **Configure a new mapper**, then select **User Attribute** from the list.
 - Configure the mapper as follows:
   - **Name:** `groups`
@@ -162,6 +175,21 @@ This scope will map the `entraid_groups` user attribute to the `groups` claim in
 ![](./client-scope-mapper.png)
 
 Click **Save**.
+
+**Option 2: Configuring the  Custom Mapper**
+
+- Open the **Mappers** tab and click **Configure a new mapper**, then select **User Attribute Filter** from the list.
+- Configure the mapper as follows:
+  - **Name:** `groups`
+  - **User Attribute Name:** `entraid_groups`
+  - **Regex Filter:** Your regex filter, in this example `ACL\.ArgoCD\..*`
+  - **Token Claim Name:** `groups`
+
+![](./custom-mapper.png)
+
+Click **Save**. In the above example only groups that start with `ACL.ArgoCD.` will be mapped to the groups claim.
+
+**Final Step for both options**
 
 To apply the scope to a client, navigate to the desired client, open the **Client Scopes** tab, and click **Add client scope**.
 Then, select the newly created scope to attach it to the client.
