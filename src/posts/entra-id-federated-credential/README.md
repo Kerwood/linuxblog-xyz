@@ -1,6 +1,6 @@
 ---
 title: Simplifying Azure Authentication from Kubernetes with Workload Identity Federation
-date: 2025-12-30 08:12:14
+date: 2025-12-30 14:53:33
 author: Patrick Kerwood
 excerpt: |
   In this blog post, I’ll walk you through an example of creating an Azure App Registration with a Federated Credential that trusts tokens issued by my Kubernetes cluster.
