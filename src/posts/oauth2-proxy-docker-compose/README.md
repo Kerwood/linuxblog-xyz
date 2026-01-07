@@ -110,7 +110,7 @@ email_domains = ["your-email-domain.com"]
 allowed_groups=["ef0ccee1-6666-41a6-8dff-8955d4c47b83"]
 
 # The signing key to secure cookies. Use below bash comamnd to generate your own.
-# dd if=/dev/urandom bs=32 count=1 2>/dev/null | base64 | tr -d -- '\n' | tr -- '+/' '-_' ; echo
+# openssl rand -base64 32 | tr -- '+/' '-_'
 cookie_secret = "TK3ao-hqeSNwdL1Irg5tZmbbyjPecUXG_wKP5M53QZM="
 
 # Address/port for OAuth2 Proxy to listen on.

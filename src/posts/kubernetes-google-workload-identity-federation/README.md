@@ -3,7 +3,8 @@ title: Setting up Workload Identity Federation between Kubernetes and Google Clo
 date: 2025-11-11 20:21:43
 author: Patrick Kerwood
 excerpt: |
-  In this blog post, I’ll show how to set up Workload Identity Federation between Kubernetes and Google Cloud Platform. This setup allows an application running in Kubernetes to use its Kubernetes service account to impersonate a Google service account and access cloud resources.
+  In this blog post, I’ll show how to set up Workload Identity Federation between a non-GKE Kubernetes cluster and Google Cloud Platform.
+  This setup allows an application running in Kubernetes to use its Kubernetes service account to impersonate a Google service account and access cloud resources.
 type: post
 blog: true
 tags: [kubernetes, google, oidc]
