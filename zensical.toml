@@ -1,0 +1,161 @@
+[project]
+site_url = "https://linuxblog.xyz/"
+site_name = "LinuxBlog.xyz"
+site_description = "A personal blog about Linux, Cloud, Kubernetes and other interesting stuff."
+site_author = "Patrick Kerwood"
+
+copyright = "Patrick Kerwood @ Powered by a bunch of small penguins.."
+
+repo_url = "https://github.com/Kerwood/linuxblog-xyz"
+repo_name = "Kerwood/linuxblog-xyz"
+# edit_uri = "edit/main/docs/"
+
+nav = [
+  { "Blog" = "index.md" },
+  { "Tags" = "tags.md" },
+]
+
+extra_css = ["stylesheets/fonts.css", "stylesheets/extra.css"]
+# extra_javascript = ["javascripts/extra.js"]
+
+[project.theme]
+# variant = "classic"
+custom_dir = "overrides"
+favicon = "assets/favicon.ico"
+logo = "assets/penguin-logo-256x256.png"
+language = "custom"
+features = [
+  "announce.dismiss",
+  # "content.action.edit",
+  # "content.action.view",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.code.select",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  # "header.autohide",
+  # "navigation.expand",
+  # "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  # "navigation.instant.progress",
+  "navigation.path",
+  # "navigation.prune",
+  "navigation.sections",
+  # "navigation.tabs",
+  # "navigation.tabs.sticky",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "toc.follow",
+  # "toc.integrate",
+]
+
+# logo = "assets/logo.png"
+
+# [project.theme.icon]
+# logo = "lucide/smile"
+
+# Fonts are set in stylesheets/extra.css to match the old blog.
+font = false
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[project.plugins.blog]
+# The blog is the site root and posts keep their old /posts/<slug>/ URLs.
+blog_dir = "."
+post_dir = "blog/posts"
+authors_file = "blog/.authors.yml"
+post_url_format = "posts/{slug}"
+post_excerpt = "required"
+post_readtime = true
+# Unknown categories (e.g. typos) fail the build.
+categories_allowed = [
+  "Kubernetes", "Identity", "Cloud", "Networking", "Self-hosting", "Linux & Tools",
+]
+pagination_per_page = 10
+archive_toc = true
+
+[project.plugins.tags]
+# Unknown tags (e.g. typos) fail the build in strict mode.
+tags_allowed = [
+  "azure", "digitalocean", "docker", "docker-compose", "github", "google",
+  "keycloak", "kubernetes", "linux", "monitoring", "networking", "proxmox",
+  "sso", "terraform", "tls", "tools", "traefik", "vmware",
+]
+
+[project.plugins.glightbox]
+
+[project.extra]
+# Hide "Made with Zensical" in the footer.
+generator = false
+
+[project.extra.analytics]
+provider = "google"
+property = "G-WB47WLJZHY"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/Kerwood"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/gitlab"
+link = "https://gitlab.com/Kerwood"
+
+[[project.extra.social]]
+icon = "fontawesome/solid/beer-mug-empty"
+link = "https://www.buymeacoffee.com/kerwood"
+name = "Like my work? Buy me a beer"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc.permalink = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+# pymdownx.snippets.base_path = "includes"
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}

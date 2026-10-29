@@ -1,0 +1,23 @@
+{#-
+  Extends the Zensical theme's main.html with social preview tags (Open Graph
+  and Twitter cards), so shared links show a title, description and image.
+-#}
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {%- set title = page.meta.title or page.title if page and page.title else config.site_name -%}
+  {%- set description = page.meta.description if page and page.meta and page.meta.description else config.site_description -%}
+  {%- set image = config.site_url ~ "assets/metaimage.png" -%}
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:type" content="{{ 'article' if page and page.url and page.url[:6] == 'posts/' else 'website' }}">
+  <meta property="og:title" content="{{ title | striptags }}">
+  <meta property="og:description" content="{{ description }}">
+  {% if page and page.canonical_url %}
+    <meta property="og:url" content="{{ page.canonical_url }}">
+  {% endif %}
+  <meta property="og:image" content="{{ image }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title | striptags }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ image }}">
+{% endblock %}

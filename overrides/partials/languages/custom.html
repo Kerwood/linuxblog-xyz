@@ -1,0 +1,9 @@
+{#-
+  English with overridden strings; anything not listed here falls back to
+  the theme's English translations. Enabled by theme.language = "custom".
+-#}
+{% macro t(key) %}{{ {
+  "language": "en",
+  "direction": "ltr",
+  "blog.continue": "Read more",
+}[key] }}{% endmacro %}

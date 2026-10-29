@@ -1,0 +1,306 @@
+/* Fonts carried over from the old VuePress theme, self-hosted in
+   stylesheets/fonts.css. Body text uses the theme's system font stack
+   (theme.font = false). */
+
+/* Accent colour carried over from the old VuePress theme ($accentColor). */
+:root {
+  --md-primary-fg-color: #22aaff;
+  --md-primary-fg-color--light: #5cc1ff;
+  --md-primary-fg-color--dark: #0088dd;
+  --md-accent-fg-color: #22aaff;
+  --md-accent-fg-color--transparent: rgba(34, 170, 255, 0.1);
+  --md-code-font: "Source Code Pro";
+}
+
+/* Text colour carried over from the old VuePress theme ($textColor). Light
+   mode only; dark mode keeps the theme's light text. */
+[data-md-color-scheme="default"] {
+  --md-default-fg-color: #2c3e50;
+  --md-typeset-color: #2c3e50;
+}
+
+/* Text 10% smaller than the theme defaults. Headings and code are sized
+   in em, so they scale with the content text (.75rem). Lines a bit tighter
+   than the theme's 1.8. */
+@media screen {
+  .md-typeset {
+    font-size: 0.675rem;
+    line-height: 1.6;
+  }
+
+  /* Sidebars (post info, table of contents) by the same 10% (.7rem). */
+  .md-nav,
+  .md-nav__link .md-typeset {
+    font-size: 0.63rem;
+  }
+
+  .md-sidebar.md-sidebar--post .md-profile__description {
+    font-size: 0.54rem;
+  }
+
+  .md-sidebar.md-sidebar--post .md-profile__description strong,
+  .md-sidebar.md-sidebar--post .md-post__meta .md-nav__link {
+    font-size: 0.585rem;
+  }
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.25;
+}
+
+.md-typeset h1 { font-size: 2.25em; }
+.md-typeset h2 { font-size: 1.875em; }
+.md-typeset h3 { font-size: 1.5em; }
+.md-typeset h4 { font-size: 1.25em; }
+
+/* Hide the left navigation sidebar on desktop, but keep its column so the
+   content is as wide as on blog posts. Below this width the same sidebar is
+   the hamburger drawer, which is kept for mobile navigation. */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    display: none;
+  }
+}
+
+/* Drop the "Metadata" heading in the post sidebar (the first section);
+   keep the "Related links" heading of the second. */
+.md-sidebar--post ul.md-post__meta:first-of-type .md-post__title {
+  display: none;
+}
+
+/* Site name in the header, styled like the old VuePress navbar. */
+.md-header__title .lb-site-name {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--md-default-fg-color);
+  /* Yanone Kaffeesatz sits high in its line box; nudge it level with the logo. */
+  position: relative;
+  top: 0.15rem;
+}
+
+.md-header__button.md-logo img {
+  height: 1.6rem;
+}
+
+/* Tighten the gap between logo and site name (the logo is hidden on
+   narrower screens, where the hamburger button sits there instead). */
+@media screen and (min-width: 76.25em) {
+  .md-header__button.md-logo {
+    margin-right: 0;
+  }
+
+  .md-header__title {
+    margin-left: 0;
+  }
+}
+
+.md-header__title .lb-site-name__accent {
+  color: #22aaff;
+}
+
+/* The page title that replaces the site name in the header on scroll. */
+.md-header__topic + .md-header__topic .md-ellipsis {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  position: relative;
+  top: 0.08rem;
+}
+
+/* The blog index has no heading, but the blog plugin adds one (from the
+   index's front matter title) to pages 2+ of the listing. Hide it there. */
+.md-content h1#patrick-kerwood {
+  display: none;
+}
+
+/* Post titles in the listings use the text colour instead of the link colour,
+   turning blue on hover. */
+.md-post--excerpt h2 a {
+  color: var(--md-default-fg-color);
+}
+
+.md-post--excerpt h2 a:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* Post listings, like the old blog: title first, then a rule with the
+   metadata line (date, category, reading time; no avatar) under it, then
+   the excerpt. The content wrapper is flattened so its title can be ordered
+   before the header. */
+.md-post--excerpt {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-post--excerpt .md-post__content {
+  display: contents;
+}
+
+.md-post--excerpt .md-post__content > * {
+  order: 3;
+}
+
+.md-post--excerpt .md-post__content > h2:first-child {
+  order: 1;
+  margin-bottom: 0.3rem;
+}
+
+.md-post--excerpt .md-post__header {
+  order: 2;
+  min-height: 0;
+  padding-top: 0.4rem;
+  margin-bottom: 0;
+  border-top: 0.05rem solid var(--md-default-fg-color--lightest);
+}
+
+.md-post--excerpt .md-post__authors {
+  display: none;
+}
+
+.md-post--excerpt .md-post__header .md-post__meta {
+  font-size: 0.55rem;
+}
+
+/* Tighter line spacing in the listing excerpts (theme default is 1.8). */
+.md-post--excerpt .md-post__content {
+  line-height: 1.5;
+}
+
+/* "Continue reading" as an outlined button, like the old blog's "Read More". */
+.md-post--excerpt .md-post__action a {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #22aaff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: var(--md-default-bg-color);
+  border: 0.05rem solid #22aaff;
+  border-radius: 0.2rem;
+}
+
+.md-post--excerpt .md-post__action a:hover,
+.md-post--excerpt .md-post__action a:focus {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+  border-color: var(--md-accent-fg-color);
+}
+
+/* Spacing in the post listings: a bit more room above the READ MORE button,
+   a bit less between posts (theme default is 3.2rem). */
+.md-post--excerpt {
+  margin-bottom: 2.4rem;
+}
+
+.md-post--excerpt .md-post__action {
+  margin-top: 0.5rem;
+}
+
+/* A more compact footer: smaller copyright text and social icons, less
+   vertical padding. */
+.md-copyright {
+  padding: 0.2rem 0;
+  font-size: 0.55rem;
+}
+
+.md-social {
+  padding: 0.1rem 0 0.3rem;
+}
+
+@media screen and (min-width: 45em) {
+  .md-social {
+    padding: 0.3rem 0;
+  }
+}
+
+.md-footer-meta__inner {
+  align-items: center;
+}
+
+/* Centre the icons in their boxes (the theme offsets them by a fixed
+   baseline shift, which sits low at this size). */
+.md-social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.md-social__link svg {
+  max-height: 0.65rem;
+  vertical-align: middle;
+}
+
+/* Listing page numbers: smaller and blue. The current page is filled, like
+   the old blog's active page button. */
+.md-pagination {
+  font-size: 0.65rem;
+}
+
+.md-pagination > * {
+  min-width: 1.5rem;
+  height: 1.5rem;
+}
+
+.md-pagination__link {
+  color: #22aaff;
+}
+
+.md-pagination__current {
+  color: #fff;
+  background-color: #22aaff;
+}
+
+/* No author card (avatar and name) in the post sidebar. The double class
+   matches the theme's own selector, which shows the card as a grid at the
+   bottom of posts on phones. */
+.md-sidebar.md-sidebar--post .md-post__authors {
+  display: none;
+}
+
+/* Compact lists: no extra gap between items or around nested lists. */
+.md-typeset ol li,
+.md-typeset ul li {
+  margin-bottom: 0;
+}
+
+.md-typeset ol li ol,
+.md-typeset ol li ul,
+.md-typeset ul li ol,
+.md-typeset ul li ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Below desktop width the post sidebar (dates, category, related links)
+   moves under the article. Pull it closer to the tags and give it room
+   above the footer. */
+@media screen and (max-width: 76.234375em) {
+  .md-content--post > .md-content__inner {
+    margin-bottom: 0;
+  }
+
+  .md-sidebar.md-sidebar--post {
+    padding-bottom: 1.6rem;
+  }
+}
+
+/* Smaller related links, at every width. */
+.md-sidebar.md-sidebar--post .md-post__meta + .md-post__meta .md-nav__link {
+  font-size: 0.55rem;
+}
+
+.md-sidebar.md-sidebar--post .md-post__meta + .md-post__meta .md-post__title {
+  font-size: 0.55rem;
+}
