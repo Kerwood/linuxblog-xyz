@@ -28,6 +28,14 @@
     line-height: 1.6;
   }
 
+  /* Below 1600px the theme's base size drops (137.5% to 125%), which made
+     the text small. Keep it at the 1600px size (14.85px). */
+  @media (max-width: 99.984375em) {
+    .md-typeset {
+      font-size: 0.7425rem;
+    }
+  }
+
   /* Sidebars (post info, table of contents) by the same 10% (.7rem). */
   .md-nav,
   .md-nav__link .md-typeset {
