@@ -31,12 +31,12 @@ Have a look at the [docs](https://cloud.google.com/config-connector/docs/how-to/
 ## Create a Google Service Account
 Create a GSA in an existing Google Project. It does not have to be the same project as where your GKE is located.
 It can be any project in your organization.
-```
+```sh
 gcloud iam service-accounts create <gsa-name> --project=<project-id>
 ```
 
 Grant the `Viewer` role to the GSA to enable it to view resources in the Google Project.
-```
+```sh
 gcloud projects add-iam-policy-binding <project-id> \
     --member "serviceAccount:<gsa-name>@<project-id>.iam.gserviceaccount.com" \
     --role "roles/viewer"
@@ -46,7 +46,7 @@ The GSA also needs a Workload Identity User role that points to a KSA in a Kuber
 
 Replace the `<kubernetes-namespace>` and `<ksa-name>` placeholders. The KSA does not need to exist
 beforehand, we will create that in the next step.
-```
+```sh
 gcloud iam service-accounts add-iam-policy-binding <gsa-name>@<project-id>.iam.gserviceaccount.com \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<project-id>.svc.id.goog[<kubernetes-namespace>/<ksa-name>]"
@@ -54,12 +54,12 @@ gcloud iam service-accounts add-iam-policy-binding <gsa-name>@<project-id>.iam.g
 
 ## Create a Kubernetes Service Account
 Create the KSA in the namespace defined in the previous step.
-```
+```sh
 kubectl create serviceaccount <ksa-name>
 ```
 
 Give the KSA an annotation that points to the created GSA.
-```
+```sh
 kubectl annotate serviceaccount <ksa-name> \
     iam.gke.io/gcp-service-account=<gsa-name>@<project-id>.iam.gserviceaccount.com
 ```
@@ -69,7 +69,7 @@ To test the setup, we need to spin up a pod in the GKE cluster with the `service
 Then we should be able to get an authorization token from the Google Metadata server and use that token to call a Google API endpoint.
 
 To spin up a Pod save below manifest to a YAML file, specify your KSA and apply it with `kubectl`.
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -84,27 +84,27 @@ spec:
 ```
 
 After deploying the pod, exec into the container.
-```
+```sh
 kubectl exec -it workload-identity-test -- bash
 ```
 
 Install `curl` and `yq` which we will need. 
-```
+```sh
 apk add curl yq
 ```
 
 To get a valid authorization token from the Google Metadata server, run below command which stores it in the `$TOKEN` variable.
-```
+```sh
 TOKEN=$(curl -sSL -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token | jq -r '.access_token')
 ```
 
 Send a request to a Google API endpoint using the provided token. In the example below we are calling the IAM API to list all services account in the given Google Project.
-```
+```sh
 curl -sSL -H "Authorization: Bearer $TOKEN" https://iam.googleapis.com/v1/projects/<project-id>/serviceAccounts
 ```
 
 The result will look something like this.
-```
+```json
 {
   "accounts": [
     {
