@@ -42,6 +42,7 @@ openssl req -x509 -sha256 -nodes -days 1460 -newkey rsa:2048 -keyout kolide.key 
 ```
 
 Then we'll have to make a few changes to the [original](../kolide-fleet/kolide-fleet.md)`fleet` service.
+
  - Comment out the `KOLIDE_SERVER_TLS` variable.
  - Add the `KOLIDE_SERVER_CERT` and `KOLIDE_SERVER_KEY` variables.
  - Add volume mounts that points to the selfsigned certificate and key.

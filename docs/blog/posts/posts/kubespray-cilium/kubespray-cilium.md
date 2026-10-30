@@ -68,6 +68,7 @@ cd kubespray
 I will be using the `inventory/sample` folder for the configuration, you can copy the folder and give it different name if you want.
 
 Now lets make a few changes to it.
+
  - Change the `kube_network_plugin` to `cni` in the `k8s-cluster.yml` file.
  - Set `etcd_deployment_type` to `host` in the `etcd.yml` file.
  - Add the `kube_proxy_remove: true` variable to `k8s-cluster.yml` file to disable Kube Proxy.
@@ -79,6 +80,7 @@ echo "kube_proxy_remove: true" >> inventory/sample/group_vars/k8s_cluster/k8s-cl
 ```
 
 **If you want to use containerd do the following.**
+
  - Set the `container_manager` to `containerd` in the `k8s-cluster.yml` file.
 
 ```sh
@@ -86,6 +88,7 @@ sed -i -r 's/^(container_manager:).*/\1 containerd/g' inventory/sample/group_var
 ```
 
 **If you want to use cri-o do the following.**
+
  - Add `download_container: false` and `skip_downloads: false` to `all.yml`.
  - Set the `container_manager` to `crio` in the `k8s-cluster.yml` file.
  - Change the `crio_conmon` path in `redhat.yml`. This should hopefully not be needed in the future. [#7690](https://github.com/kubernetes-sigs/kubespray/issues/7690)

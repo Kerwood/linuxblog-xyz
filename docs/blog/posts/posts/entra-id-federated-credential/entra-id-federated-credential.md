@@ -237,6 +237,7 @@ This post demonstrates the concept of Workload Identity Federation, but where ca
 Any application that requires Single Sign-On can benefit from it. In such cases, the application needs to authenticate to Azure to request a user access token.
 
 Several software vendors now support federated credentials:
+
 - **Argo CD**: Enables Single Sign-On for users.
 - **Crossplane**: Uses federated credentials for Azure providers to manage Azure resources without relying on long-lived secrets.
 

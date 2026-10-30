@@ -21,6 +21,7 @@ This is a quick how-to on creating a virtual machine in Digital Ocean also known
 
 
 First,
+
 - Go to the [Terraform download site](https://www.terraform.io/downloads.html) and grab the terraform binary for your operating system.
 - Create a [Personal access token](https://cloud.digitalocean.com/account/api/tokens) on your Digital Ocean account.
 - Create a new file called `do.tf`.
@@ -56,6 +57,7 @@ output "vm1_ipv4" {
 ```
 
 There are a few values that we need to replace.
+
 - `resource-name`
 - `name`
 - `sshkey-fingerprint`

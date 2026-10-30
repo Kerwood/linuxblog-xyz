@@ -36,6 +36,7 @@ It not only removes the burden of credential rotation but also simplifies and st
 In this tutorial, we’ll create a JavaScript application that lists objects in a Google Cloud Storage bucket. The application will use the Google SDK to obtain a Google access token by exchanging its Kubernetes service account token.
 
 To follow along, you’ll need the following tools installed.
+
 - `docker` - [https://www.docker.com/](https://www.docker.com/)
 - `kind` - [https://kind.sigs.k8s.io/](https://kind.sigs.k8s.io/)
 - `jq` - [https://jqlang.org/](https://jqlang.org/)

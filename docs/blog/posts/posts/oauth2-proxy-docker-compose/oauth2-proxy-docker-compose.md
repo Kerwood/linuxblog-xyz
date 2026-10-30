@@ -29,6 +29,7 @@ webserver.
 
 ## Prerequisites
 To follow along and recreate this setup, you'll need:
+
 - A Microsoft Azure tenant.
 - A publicly accessible server. If you don’t have one, I recommend [DigitalOcean](https://www.digitalocean.com/). Their cheapest Droplet ($5/month, billed hourly) is fine.
 - Docker installed on the server.
@@ -66,6 +67,7 @@ az ad app credential reset --years 50 --id <application-id> -o json
 This step is optional, but recommended if you want to restrict access to only specific users based on group membership.
 
 **Add Group Claims to the Token**
+
 - In your App Registration, go to "**Token configuration**".
 - Click "**Add group claim**".
 - Select "**Groups assigned to the application**", then click **Add**.
@@ -76,11 +78,13 @@ This will add group membership to the access token created by Entra ID.
     If your Entra ID groups are synchronized from Active Directory, you can change the token format to use sAMAccountName instead of Group IDs. This will include the group name in the access token, making it easier to work with in your application.
 
 **Assign Users or Groups to the Application**
+
 - Use the search bar at the top of the Azure portal to find and open **Enterprise Applications**.
 - Locate the Enterprise Application that matches the name of your App Registration.
 - Go to "**Users and groups**" and assign the desired group.
 
 **Enforce Group Assignment**
+
 - In the same Enterprise Application, go to **Properties**.
 - Set "**Assignment required?**" to **Yes**.
 

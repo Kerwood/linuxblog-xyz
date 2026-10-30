@@ -37,6 +37,7 @@ From the [architecture docs:](https://pinniped.dev/docs/background/architecture/
 
 ## Prerequisites
 For this tutorial you will need the following.
+
  - A working Kubernetes cluster with:
    - An ingress controller installed.
    - [Cert Manager](../installing-cert-manager/installing-cert-manager.md) installed or a trusted certificate.
@@ -126,6 +127,7 @@ spec:
 ```
 
 Create and apply a `OIDCIdentityProvider` resource.
+
 - Give it a name
 - Set the `issuer` property
 - Set the `secretName`.

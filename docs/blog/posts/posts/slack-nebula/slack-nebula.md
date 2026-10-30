@@ -164,6 +164,7 @@ Remember that its the certificate that determines the hostname, IP address and g
 This will create `server1.crt` and `server1.key`.
 
 Now repeat the steps.
+
 - SSH to the node and create the `/etc/nebula` directory. Copy the two newly created files and the original Lighthouse `ca.crt` file to the directory.
 - Download the config file into `/etc/nebula`.
 - Download the Nebula binary and move it the to `/usr/local/bin`. Remember to set the security context if you are using SELinux.

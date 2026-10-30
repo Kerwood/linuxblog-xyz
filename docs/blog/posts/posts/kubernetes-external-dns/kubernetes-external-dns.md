@@ -158,10 +158,12 @@ spec:
 External DNS will create the following records.
 
 **A Record**
+
  - Name: `hello-world.example.org`
  - Value: `<ingress-ip>`
 
 **TXT Record**
+
  - Name: `xdns-hello-world.example.org`
  - Value: `"heritage=external-dns,external-dns/owner=6b32e37c,external-dns/resource=ingress/default/hello-world"` 
   

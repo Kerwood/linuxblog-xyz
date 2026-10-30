@@ -23,6 +23,7 @@ In this guide I will deploy a Hello World application and a Keycloak Gatekeeper 
 
 
 The authentication flow is as follows:
+
   - Your HTTP request to `hello-world.example.org` hits the GateKeeper proxy.
   - The proxy checks your browser for a encrypted token.
   - If its not present it will redirect you to the Keycloak login page.
@@ -189,6 +190,7 @@ Go to the "Client Scopes" tab and add the `good-service` scope.
 ![](./add-scope-to-client.png)
 
 More information about Client Scopes and Audience can be found here.
+
 - [https://stackoverflow.com/questions/53550321/keycloak-gatekeeper-aud-claim-and-client-id-do-not-match](https://stackoverflow.com/questions/53550321/keycloak-gatekeeper-aud-claim-and-client-id-do-not-match)
 - [https://github.com/keycloak/keycloak-documentation/blob/master/server_admin/topics/clients/client-scopes.adoc](https://github.com/keycloak/keycloak-documentation/blob/master/server_admin/topics/clients/client-scopes.adoc)
 - [https://github.com/keycloak/keycloak-documentation/blob/master/server_admin/topics/clients/oidc/audience.adoc](https://github.com/keycloak/keycloak-documentation/blob/master/server_admin/topics/clients/oidc/audience.adoc)

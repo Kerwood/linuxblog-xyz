@@ -28,6 +28,7 @@ While the Table of Contents seems a bit overwhelming at first glance, the second
 
 ## VPN Options in Google Cloud
 Google Cloud offers two types of VPN:
+
 - **Classic VPN**: Supports only a single tunnel and static routing.
 - **HA VPN**: Supports multiple redundant tunnels for high availability, and requires the BGP routing protocol for dynamic route exchange.
 
@@ -161,6 +162,7 @@ bgpPeers:
 ```
 
 We’ll need the following information to configure the remote VM.
+
 - Google Cloud Router IP: `169.254.19.149`, ASN `65000`
 - CentOS VM IP (to configure): `169.254.19.150`, ASN `65001`
 - IPsec shared secret: `mj6Ns6K3iiQgYPfSjW5G/hfyUmxn9sU7`
@@ -170,6 +172,7 @@ We’ll need the following information to configure the remote VM.
 With the Google Cloud side ready, it’s time to prepare the CentOS VM on DigitalOcean.
 
 The main steps are:
+
 - Enable packet forwarding in the kernel.
 - Create an XFRM interface for the IPsec tunnel.
 - Install and configure strongSwan.
@@ -255,6 +258,7 @@ strongSwan relies on configuration files located at `/etc/strongswan/swanctl/con
 To set up a new configuration, create a file named `gcp.conf` in this directory and include the following content.
 
 Modify the values to match your setup:
+
 - `64.227.72.229`: The external IP if the VM.
 - `34.157.50.13`: The Google Cloud VPN Gateway IP from earlier.
 - `mj6Ns6K3iiQgYPfSjW5G/hfyUmxn9sU7`: the shared secret you defined when creating the tunnel in Google Cloud.
@@ -366,6 +370,7 @@ router id 64.227.72.229;
 
 ### Add the BGP Peer
 Next, add the following block of configuration to set up the peer for the Google Cloud Router.
+
 - `local`: The link-local address provided by Google and the ASN you assigned to this server.
 - `neighbor`: The link-local address assigned to the Cloud Router and its corresponding ASN.
 

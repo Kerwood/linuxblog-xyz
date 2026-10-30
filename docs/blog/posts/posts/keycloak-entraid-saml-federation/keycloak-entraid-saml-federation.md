@@ -61,12 +61,14 @@ At the top, click **Add a group claim**. A pane will appear on the right with se
 ![](./group-claim.png)
 
 To include all user groups in the token, select **All groups**.
+
 - In the **Source Attribute** dropdown, choose **Group ID** to include groups by their Entra ID UUID (e.g., `8ab4afff-cc8e-438f-94ca-2c2729afbce8`).
 - Alternatively, if your groups are synchronized from an on-premises Active Directory, you can select **sAMAccountName** to include the groups by name instead. Unfortunately, this option isn’t available for cloud-only groups.
 
 Including all groups in the token is generally **not recommended**. If a user belongs to many groups (e.g., 200), the token will become large and expose group membership to all applications using it.
 
 Another option is **Groups assigned to the application**, which only adds groups assigned to this Enterprise Application.
+
 - With this option, you can choose **Cloud-only group display names** as the **Source Attribute** to include groups by their display names.
 - For mixed on-premises/cloud groups, select **sAMAccountName** as the **Source Attribute** and click the **Emit group name for cloud-only groups** checkbox. This ensures group names from both on-premises and cloud are included in the claim.
 
@@ -110,18 +112,22 @@ Click **Add Mapper** to create a new mapper. Let’s start with mapping the user
 Below is the complete list of mappers you need to create (excluding groups, which is handled differently):
 
 **Username**
+
   - **Attribute Name:** `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`
   - **User Attribute Name:** `username`
 
 **Firstname**
+
   - **Attribute Name:** `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`
   - **User Attribute Name:** `firstName`
 
 **Lastname**
+
   - **Attribute Name:** `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname`
   - **User Attribute Name:** `lastName`
 
 **Email**
+
   - **Attribute Name:** `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
   - **User Attribute Name:** `email`
 
@@ -146,6 +152,7 @@ Instead of mapping to an existing user attribute, we create a custom attribute.
 Additionally, set the **Sync Mode Override** to **Force** to ensure that the user attributes are updated every time the user logs in.
 
 Create a **Groups** mapper using the configuration below:
+
   - **Attribute Name:** `http://schemas.microsoft.com/ws/2008/06/identity/claims/groups`
   - **User Attribute Name:** `entraid_groups` (custom)
   - **Sync Mode Override:** Force

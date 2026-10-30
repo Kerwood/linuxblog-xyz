@@ -75,6 +75,7 @@ jobs:
 In the next few steps we will add jobs to the workflow file.
 
 The workflow consists of two primary jobs:
+
 - `terraform-plan`: Runs the Terraform plan step and determines if there are changes. If changes are detected, it sends a notification to Slack.
 - `terraform-apply`: Applies changes upon approval if any changes are detected in the previous job.
 

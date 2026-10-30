@@ -74,6 +74,7 @@ touch acme.json && chmod 600 acme.json
 ```
 
 Create a `docker-compose.yaml` file using the content below and do the following:
+
 - Replace the email address in the `traefik` service with your actual email. This is required by Let's Encrypt for certificate registration.
 - Update the URL in the `caddy` service labels to match your actual URL.
 - Ensure the `./data` directory exists on your host system, or update the volume path in the `caddy` service to a valid directory.

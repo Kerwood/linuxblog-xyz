@@ -100,6 +100,7 @@ openssl x509 -req -in example-org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -
 ```
 
 You should now have the following files.
+
 - `ca.crt`
 - `ca.key`
 - `tls.crt`
