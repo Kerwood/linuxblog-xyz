@@ -9,6 +9,8 @@ slug: talos-cluster-on-proxmox
 categories:
   - "Kubernetes"
   - "Self-hosting"
+links:
+  - blog/posts/posts/talos-control-plane-vip/talos-control-plane-vip.md
 tags:
   - "kubernetes"
   - "proxmox"
@@ -162,6 +164,13 @@ talosctl gen config homelab https://10.0.0.21:6443 \
   --with-secrets secrets.yaml \
   --install-image factory.talos.dev/nocloud-installer/$SCHEMATIC:$TALOS
 ```
+
+!!! info "Pointing the endpoint at a virtual IP"
+
+    Using the node IP as the endpoint ties the Kubernetes API to a single machine. Talos can also share a virtual IP
+    between the control plane nodes, which is needed if you want more than one control plane. That is covered in
+    [Moving the Talos Kubernetes API to a Virtual IP](../talos-control-plane-vip/talos-control-plane-vip.md), the
+    follow-up to this post.
 
 The `--install-image` flag is easy to miss but important. The ISO only decides what runs in maintenance mode. The
 installer image is what actually ends up on the disk, and if you leave it out, you get the plain Talos image without

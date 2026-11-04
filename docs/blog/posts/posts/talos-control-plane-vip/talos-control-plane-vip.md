@@ -2,13 +2,15 @@
 title: "Moving the Talos Kubernetes API to a Virtual IP"
 description: "Change the Kubernetes API endpoint of a running Talos cluster from a node IP to a control plane VIP, using Layer2VIPConfig."
 date:
-  created: 2026-11-02 21:00:00
+  created: 2026-11-04 21:00:00
 authors:
   - kerwood
 slug: talos-control-plane-vip
 categories:
   - "Kubernetes"
   - "Self-hosting"
+links:
+  - blog/posts/posts/talos-cluster-on-proxmox/talos-cluster-on-proxmox.md
 tags:
   - "kubernetes"
   - "proxmox"
@@ -126,7 +128,7 @@ issuer:
 Since the endpoint is in every config file, regenerate them with the new endpoint. Use the same `secrets.yaml` as
 before, otherwise you get a brand new set of certificates that don't match the running cluster.
 
-```sh
+```sh hl_lines="8"
 SCHEMATIC=ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
 TALOS=v1.14.5
 
@@ -134,7 +136,7 @@ talosctl gen config homelab https://10.0.0.20:6443 \
   --with-secrets secrets.yaml \
   --install-image factory.talos.dev/nocloud-installer/$SCHEMATIC:$TALOS \
   --config-patch-control-plane @vip.yaml \
-  --config-patch-control-plane @issuer.yaml \
+  --config-patch-control-plane @issuer.yaml \  # Only needed for existing clusters
   --output-types controlplane,worker \
   --force
 ```
