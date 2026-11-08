@@ -88,14 +88,14 @@ The VIP is assigned to a network interface, so we need its name. Check it on the
 talosctl get links -n 10.0.0.21
 ```
 
-Look for the physical interface with the MAC address of the node. On Proxmox with a VirtIO network card, it is
-usually called `ens18`. Create a patch file called `vip.yaml`.
+Verify that the physical interface with the MAC address of the node is called `eth0`. If it has another name, use
+that in the patch below. Create a patch file called `vip.yaml`.
 
 ```yaml
 apiVersion: v1alpha1
 kind: Layer2VIPConfig
 name: 10.0.0.20 # The virtual IP
-link: ens18     # The interface to announce it on
+link: eth0      # The interface to announce it on
 ```
 
 The VIP is only meant for control plane nodes, so this patch is only applied to them.
@@ -157,17 +157,18 @@ talosctl apply-config -n 10.0.0.21 -f controlplane.yaml --dry-run
 talosctl apply-config -n 10.0.0.21 -f controlplane.yaml
 ```
 
-Once applied, the control plane node claims the VIP. You can see it as an extra address on the interface.
+Once applied, the control plane node claims the VIP. You can see it in the list of cluster members, as an extra
+address on the control plane node.
 
 ```sh
-talosctl get addresses -n 10.0.0.21
+talosctl get members -n 10.0.0.21
 ```
 
 ```
-NODE        NAMESPACE   TYPE            ID                   VERSION   ADDRESS        LINK
-10.0.0.21   network     AddressStatus   ens18/10.0.0.20/32   1         10.0.0.20/32   ens18
-10.0.0.21   network     AddressStatus   ens18/10.0.0.21/24   1         10.0.0.21/24   ens18
-...
+NODE        NAMESPACE   TYPE     ID              VERSION   HOSTNAME        MACHINE TYPE   OS                ADDRESSES
+10.0.0.21   cluster     Member   talos-def-ghi   1         talos-def-ghi   worker         Talos (v1.14.5)   ["10.0.0.22"]
+10.0.0.21   cluster     Member   talos-jkl-mno   1         talos-jkl-mno   worker         Talos (v1.14.5)   ["10.0.0.23"]
+10.0.0.21   cluster     Member   talos-xyz-abc   2         talos-xyz-abc   controlplane   Talos (v1.14.5)   ["10.0.0.20","10.0.0.21"]
 ```
 
 Talos also regenerates the API server certificate to include the new endpoint, so there is no need to add the VIP
