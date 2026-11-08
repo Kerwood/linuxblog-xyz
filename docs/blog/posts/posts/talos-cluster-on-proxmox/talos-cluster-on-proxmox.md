@@ -107,28 +107,42 @@ curl -X POST --data-binary @schematic.yaml https://factory.talos.dev/schematics
 
 ### Downloading the ISO
 
-Download the ISO directly on the Proxmox host, into the ISO storage.
+Download the ISO and upload it to the ISO storage in Proxmox, or download it directly on the Proxmox host.
 
 ```sh
 SCHEMATIC=ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
 TALOS=v1.14.5
 
-curl -Lo /var/lib/vz/template/iso/talos-$TALOS-nocloud-amd64.iso \
+curl -Lo talos-$TALOS-nocloud-amd64.iso \
   https://factory.talos.dev/image/$SCHEMATIC/$TALOS/nocloud-amd64.iso
 ```
 
 ## Creating the VMs
 
-Create the three VMs in the Proxmox UI with the sizes from the table, and boot them from the Talos ISO. There are
-two settings you need to remember.
+Create the three VMs in the Proxmox UI with the sizes from the table, and boot them from the Talos ISO.
+
+These are proof-of-concept sizes, just enough to run Talos and a test app. 2 GB of memory, 2 cores and a 10 GB disk
+is the minimum Talos asks for on a control plane node, and the
+[recommended sizes](https://docs.siderolabs.com/talos/v1.14/getting-started/system-requirements) are a lot larger,
+so give the nodes more if you plan to run real workloads on them.
+
+There are three settings you need to remember.
 
 - **QEMU Guest Agent:** enable it under **System** in the create wizard, or later under **Options**. This adds the
   device that the guest agent extension in our image talks to.
 - **MAC address:** set the static MAC address from the table under **Network**, so the VM gets its static lease from
   the DHCP server.
+- **Ballooning:** untick **Ballooning Device** under **Memory** in the create wizard. It is hidden until you tick
+  **Advanced** at the bottom of the wizard. Kubernetes schedules workloads based on the memory the node reports, and memory the
+  hypervisor takes back later is not something it can plan around.
 
-Also set the CPU type to `host`. Talos requires the x86-64-v2 instruction set, and with the old `kvm64` type the VM
-hangs during boot at 100% CPU without any useful error.
+Leave the CPU type at the default `x86-64-v2-AES`. Talos requires the x86-64-v2 instruction set, so don’t pick the
+old `kvm64` type, which makes the VM hang during boot at 100% CPU. `host` works too, but it ties the VM to the host’s
+CPU model and can block live migration between different hosts.
+
+Since all three VMs are identical, you only need to create the first one. Before starting it, right-click it and
+choose **Clone** to create the other two. A clone gets a new random MAC address, so remember to change it to the
+static MAC address from the table under **Hardware**, **Network Device**, before starting the clone.
 
 Start the VMs. Each VM boots into **maintenance mode**. Talos is running from the ISO, has an IP address from DHCP and waits for a
 machine configuration. Open the console of one of the VMs and you’ll see the Talos dashboard with the IP in the top
@@ -211,13 +225,8 @@ Next, set up `talosctl` to talk to the cluster. Merge the generated `talosconfig
 at `~/.talos/config`. The cluster is added as a new context and becomes the current one, so `talosctl` works from
 any directory.
 
-Then set the endpoint and the default node. The endpoint is where `talosctl` connects, and the node is the default
-target for commands when you don't give `-n`.
-
 ```sh
 talosctl config merge ./talosconfig
-talosctl config endpoint 10.0.0.21
-talosctl config node 10.0.0.21
 ```
 
 !!! tip "Optionally, keep the talosconfig local"
@@ -229,9 +238,15 @@ talosctl config node 10.0.0.21
 
     ```sh
     export TALOSCONFIG=./talosconfig
-    talosctl config endpoint 10.0.0.21
-    talosctl config node 10.0.0.21
     ```
+
+Then set the endpoint and the default node. The endpoint is where `talosctl` connects, and the node is the default
+target for commands when you don't give `-n`.
+
+```sh
+talosctl config endpoint 10.0.0.21
+talosctl config node 10.0.0.21
+```
 
 Setting the default node to the control plane only is on purpose. Commands like `reboot` and `upgrade` would
 otherwise hit every node at once, and the next command must only run against a single node.
@@ -241,6 +256,23 @@ Bootstrap etcd on the control plane. This is done exactly once, for the lifetime
 ```sh
 talosctl bootstrap
 ```
+
+Check that all three nodes have found each other. Talos nodes discover the other members of the cluster on their
+own, so this works before Kubernetes is fully up.
+
+```sh
+talosctl get members
+```
+
+```
+NODE        NAMESPACE   TYPE     ID              VERSION   HOSTNAME        MACHINE TYPE   OS                ADDRESSES
+10.0.0.21   cluster     Member   talos-def-ghi   1         talos-def-ghi   worker         Talos (v1.14.5)   ["10.0.0.22"]
+10.0.0.21   cluster     Member   talos-jkl-mno   1         talos-jkl-mno   worker         Talos (v1.14.5)   ["10.0.0.23"]
+10.0.0.21   cluster     Member   talos-xyz-abc   1         talos-xyz-abc   controlplane   Talos (v1.14.5)   ["10.0.0.21"]
+```
+
+There should be one member per node. If a node is missing, check that the config was applied to it and that it can
+reach the control plane.
 
 It takes a few minutes for etcd and the Kubernetes control plane components to come up. You can follow along with
 the dashboard, or wait for the health check to pass.
@@ -257,7 +289,6 @@ set as the current context.
 
 ```sh
 talosctl kubeconfig
-kubectl get nodes -o wide
 ```
 
 !!! tip "Optionally, keep the kubeconfig local"
@@ -269,8 +300,13 @@ kubectl get nodes -o wide
     ```sh
     talosctl kubeconfig .
     export KUBECONFIG=./kubeconfig
-    kubectl get nodes -o wide
     ```
+
+Get the nodes.
+
+```sh
+kubectl get nodes -o wide
+```
 
 ```
 NAME            STATUS   ROLES           AGE   VERSION   INTERNAL-IP    ...
